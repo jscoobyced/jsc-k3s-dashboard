@@ -1,0 +1,4 @@
+docker/kubectl/config/config
+src/node_modules
+src/.next
+src/Dockerfile.arm64
