@@ -2,3 +2,4 @@ docker/kubectl/config/config
 src/node_modules
 src/.next
 src/Dockerfile.arm64
+etc/yaml/jsc-k3s-dashboard/02-deployment.yaml

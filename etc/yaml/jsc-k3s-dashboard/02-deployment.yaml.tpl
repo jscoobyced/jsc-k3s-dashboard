@@ -30,7 +30,7 @@ spec:
         - name: TZ
           value: "Asia/Bangkok"
         - name: MAIN_NODE_IP
-          value: "192.168.1.120"
+          value: "IPADDRESS"
         - name: API_TOKEN
           valueFrom:
             secretKeyRef:
@@ -45,4 +45,4 @@ spec:
           requests:
             cpu: "500m"
             memory: "512Mi"
-      terminationGracePeriodSeconds: 31
+      terminationGracePeriodSeconds: 30

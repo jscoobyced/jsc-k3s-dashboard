@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# JSC Poor man's Kubernetes Dashboard
+
+Initially tested on [Rancher's k3s](https://rancher.com/products/k3s), which includes by default the metrics services. It should work on any kubernetes implementation, but you might have to add the metrics services if they are not already there.
 
 ## Getting Started
 
-First, run the development server:
+### Dependencies
 
-```bash
-npm run dev
-# or
-yarn dev
+#### Version 1
+
+You need a running docker installation, with `docker-compose`  and `kubectl` command.
+
+#### New cluster
+
+When using the application for the first time on a cluster, you need to create the service account to access the cluster. Run the following commands:
+```
+./etc/bin/newcluster.sh
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Simply run:
+```
+make dev MAIN_NODE_IP="10.0.0.1"
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Change the IP address in the command above of your k3s master node IP address.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Production
 
-## Learn More
+You can deploy this code on your cluster so it will self monitor the metrics.
+First build the image:
+```
+./etc/bin/build.sh <your_docker_id> Y
+```
 
-To learn more about Next.js, take a look at the following resources:
+Where:
+- `<your_docker_id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
+- `Y` means it will push the images to your docker registry
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You will need to have logged-in your docker account on your local machine to be able to push, or to configure your CI environment to be able to push.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Then deploy to your cluster. The first time you deploy, edit the file `./etc/yaml/02-deployment.yaml` and update the IP address in the `MAIN_NODE_IP` section.
+Then run these commands:
+```
+./etc/bin/first-deploy.sh <IP of master node>
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To redeploy you only need to run:
+```
+kubectl apply -f ./yml/jsc-k3s-dashboard/02-deployment.yaml
+```

@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  web:
+    build:
+      context: ./etc/docker
+      dockerfile: Dockerfile.dev
+    image: jscdroiddev/jsc-k3s-dashboard
+    ports:
+      - "3000:3000"
+    volumes:
+      - "${PWD}/src:/app"
