@@ -40,13 +40,15 @@ Where:
 
 You will need to have logged-in your docker account on your local machine to be able to push, or to configure your CI environment to be able to push.
 
-Then deploy to your cluster. The first time you deploy, edit the file `./etc/yaml/02-deployment.yaml` and update the IP address in the `MAIN_NODE_IP` section.
+Then deploy to your cluster. The first time you deploy, run.
 Then run these commands:
 ```
 ./etc/bin/first-deploy.sh <IP of master node>
 ```
+Where `<IP of master node>` is the IP of your master node.
 
-To redeploy you only need to run:
+The next times you want to deploy, you only need to run:
 ```
-kubectl apply -f ./etc/yaml/jsc-k3s-dashboard/02-deployment.yaml
+./etc/bin/redeploy.sh <IP of master node>
 ```
+Where `<IP of master node>` is the IP of your master node.
