@@ -48,5 +48,5 @@ Then run these commands:
 
 To redeploy you only need to run:
 ```
-kubectl apply -f ./yml/jsc-k3s-dashboard/02-deployment.yaml
+kubectl apply -f ./etc/yaml/jsc-k3s-dashboard/02-deployment.yaml
 ```
