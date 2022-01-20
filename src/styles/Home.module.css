@@ -32,15 +32,6 @@
     border-left: 2px solid #000000;
 }
 
-.main table th.desktop,
-.main table td.desktop {
-    display: table-cell;
-}
-
-.main table.mobile {
-    display: none;
-}
-
 .main table tr {
     border-bottom: 2px solid #000000;
 }
@@ -77,11 +68,19 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .main table th.desktop,
-    .main table td.desktop {
-        display: none;
+    .main table {
+        font-size: small;
     }
-    .main table.mobile {
-        display: table;
+    .container {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .main table {
+        font-size: x-small;
+    }
+    .container {
+        padding: 0;
     }
 }

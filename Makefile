@@ -16,7 +16,7 @@ build:
 
 deploy:
 	@echo "Deploying to cluster."
-	@./etc/bin/redeploy.sh $(MAIN_NODE_IP)
+	@./etc/bin/redeploy.sh $(DOCKER_ID)
 
 undeploy:
 	@echo "Undeploying from cluster"

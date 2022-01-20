@@ -1,32 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import https from 'https';
 import { Capacity, K3sNode } from '../../models/k3snode';
+import { rawUnit } from '../../services/format';
 
 type Data = {
   data?: K3sNode[],
   error?: string
 }
 
-const getNumber = (data: string) => {
-  return +(data.substring(0, data.length - 2));
-}
-
-const rawUnit = (value: string): number => {
-  let data = +value;
-  if (value.indexOf('Ki') > 0) {
-    data = getNumber(value) * 1024;
-  }
-  else if (value.indexOf('Mi') > 0) {
-    data = getNumber(value) * 1024 * 1024;
-  }
-  else if (value.indexOf('Gi') > 0) {
-    data = getNumber(value) * 1024 * 1024 * 1024;
-  }
-  return data;
-}
-
-const parseResponse = (data: string): K3sNode[] => {
-  const json = JSON.parse(data);
+const parseResponse = (json: any): K3sNode[] => {
   const nodes: K3sNode[] = [];
   for (const item of json.items) {
     const capacity: Capacity = {
@@ -52,35 +33,20 @@ const parseResponse = (data: string): K3sNode[] => {
   return nodes;
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   const token = process.env.API_TOKEN as string;
   const mainNodeIp = process.env.MAIN_NODE_IP as string;
+  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
   const options = {
-    rejectUnauthorized: false,
-    hostname: mainNodeIp,
-    port: 6443,
-    path: '/api/v1/nodes',
-    method: 'GET',
     headers: { 'Authorization': `Bearer ${token}` }
   }
 
-  let nodes = '';
-
-  const kreq = https.get(options, (kres) => {
-    kres.on('data', (data) => {
-      nodes += data;
-    });
-
-    kres.on('end', () => {
-      res.status(200).json({ data: parseResponse(nodes) });
-    });
-  });
-
-  kreq.on('error', (error) => {
-    res.status(500).json({ error: error.message });
-  });
+  const result = await fetch(`https://${mainNodeIp}:6443/api/v1/nodes`, options);
+  const json = await result.json();
+  const nodes = parseResponse(json);
+  res.status(200).json({ data: nodes });
 }

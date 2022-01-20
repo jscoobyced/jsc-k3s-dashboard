@@ -53,6 +53,7 @@ You can then browse to http://&lt;service IP&gt;:8080
 
 You can combine a build and deploy by adding the main node IP address to the deploy command:
 ```
-make deploy MAIN_NODE_IP=<IP of master node>
+make deploy DOCKER_ID=<docker id>
 ```
-Where `<IP of master node>` is the IP of your master node. If you don't pass the docker id, it will simply redeploy, fetching the most recent image from the registry.
+Where:
+- `<docker id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
