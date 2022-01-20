@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { K3sNode } from '../models/k3snode'
 import styles from '../styles/Home.module.css'
-import os from 'os';
 
 const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
 
@@ -13,22 +12,38 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
     return (bytes / Math.pow(1024, e)).toFixed(2) + " " + s[e];
   }
 
-  const nodes = (): JSX.Element[] => {
+  const nodes = (isMobile: boolean): JSX.Element[] => {
     const nodeRows: JSX.Element[] = [];
     if (data === null) return [];
     const allNodes = data.data.sort((a, b) => (a.nodeName > b.nodeName ? 1 : -1));
     for (const item of allNodes) {
-      const row = (<tr key={'node-' + item.nodeName}>
-        <td><Link href={'/node/' + item.nodeName}>{item.nodeName}</Link></td>
-        <td>{item.ipAddress}</td>
-        <td>{item.capacity.cpu}</td>
-        <td>{readablizeBytes(item.capacity.memory)}</td>
-        <td>{readablizeBytes(item.capacity.storage)}</td>
-        <td>{item.capacity.pods}</td>
+      const desktopOnly = (<>
+        <td className={styles.desktop}>{item.allocatable.cpu}</td>
+        <td className={styles.desktop}>{readablizeBytes(item.allocatable.memory)}</td>
+        <td className={styles.desktop}>{readablizeBytes(item.allocatable.storage)}</td>
+        <td className={styles.desktop}>{item.allocatable.pods}</td>
+      </>
+      );
+      const mobileOnly = (<>
         <td>{item.allocatable.cpu}</td>
         <td>{readablizeBytes(item.allocatable.memory)}</td>
         <td>{readablizeBytes(item.allocatable.storage)}</td>
         <td>{item.allocatable.pods}</td>
+      </>
+      );
+      const desktop = (
+        <>
+          <td><Link href={'/node/' + item.nodeName}>{item.nodeName}</Link></td>
+          <td>{item.ipAddress}</td>
+          <td>{item.capacity.cpu}</td>
+          <td>{readablizeBytes(item.capacity.memory)}</td>
+          <td>{readablizeBytes(item.capacity.storage)}</td>
+          <td>{item.capacity.pods}</td>
+        </>
+      )
+      const row = (<tr key={'node-' + item.nodeName}>
+        {!isMobile ? desktop : <></> }
+        { isMobile ? mobileOnly : desktopOnly}
       </tr>);
       nodeRows.push(row);
     }
@@ -44,7 +59,7 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to JSC k3s Dashboard
+          Welcome to JSC Poor&apos;s man k3s Dashboard
         </h1>
         <table>
           <caption>Nodes list</caption>
@@ -53,6 +68,26 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
               <th rowSpan={2}>Node Name</th>
               <th rowSpan={2}>IP Address</th>
               <th colSpan={4}>Capacity</th>
+              <th colSpan={4} className={styles.desktop}>Allocatable</th>
+            </tr>
+            <tr>
+              <th>CPU</th>
+              <th>Memory</th>
+              <th>Storage</th>
+              <th>Pods</th>
+              <th className={styles.desktop}>CPU</th>
+              <th className={styles.desktop}>Memory</th>
+              <th className={styles.desktop}>Storage</th>
+              <th className={styles.desktop}>Pods</th>
+            </tr>
+          </thead>
+          <tbody>
+            {nodes(false)}
+          </tbody>
+        </table>
+        <table className={styles.mobile}>
+          <thead>
+            <tr>
               <th colSpan={4}>Allocatable</th>
             </tr>
             <tr>
@@ -60,14 +95,10 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
               <th>Memory</th>
               <th>Storage</th>
               <th>Pods</th>
-              <th>CPU</th>
-              <th>Memory</th>
-              <th>Storage</th>
-              <th>Pods</th>
             </tr>
           </thead>
           <tbody>
-            {nodes()}
+            {nodes(true)}
           </tbody>
         </table>
       </main>

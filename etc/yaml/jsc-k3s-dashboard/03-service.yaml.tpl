@@ -12,4 +12,4 @@ spec:
     targetPort: 3000
     name: k3s-dashboard-web
   externalIPs:
-  - 192.168.1.121
+  - IPADDRESS

@@ -1,32 +1,44 @@
 .container {
-  padding: 0 2rem;
+    padding: 0 2rem;
+    display: flex;
+    min-height: 100vh;
+    ;
+    flex-direction: column;
 }
 
 .main {
-  min-height: 100vh;
-  padding: 2rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding: 2rem 0;
+    flex: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main table {
-  border-spacing: 2px;
-  border-collapse:collapse;
-  color: #FFFFFF;
+    border-spacing: 2px;
+    border-collapse: collapse;
+    color: #FFFFFF;
 }
 
 .main table caption {
-  padding-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .main table thead {
-  background-color: #202020;
+    background-color: #202020;
 }
 
 .main table th {
-  border-left: 2px solid #000000;
+    border-left: 2px solid #000000;
+}
+
+.main table th.desktop,
+.main table td.desktop {
+    display: table-cell;
+}
+
+.main table.mobile {
+    display: none;
 }
 
 .main table tr {
@@ -35,28 +47,41 @@
 
 .main table th,
 .main table td {
-  padding: 5px 10px;
-  text-align: center;
+    padding: 5px 10px;
+    text-align: center;
 }
 
-.main table tbody tr:nth-child(even) {background-color: #202020;}
-.main table tbody tr:nth-child(odd) {background-color: #161616;}
+.main table tbody tr:nth-child(even) {
+    background-color: #202020;
+}
+
+.main table tbody tr:nth-child(odd) {
+    background-color: #161616;
+}
 
 .footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex: 1;
+    padding: 1rem 0;
+    border-top: 1px solid #eaeaea;
+    justify-content: center;
+    align-items: center;
 }
 
 .code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+    background: #fafafa;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
+@media only screen and (max-width: 768px) {
+    .main table th.desktop,
+    .main table td.desktop {
+        display: none;
+    }
+    .main table.mobile {
+        display: table;
+    }
+}

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: k3s-dashboard
-        image: jscdroiddev/jsc-k3s-dashboard:arm64-latest
+        image: DOCKERID/jsc-k3s-dashboard:arm64-latest
         imagePullPolicy: Always
         securityContext:
           runAsUser: 1001
@@ -45,4 +45,4 @@ spec:
           requests:
             cpu: "500m"
             memory: "512Mi"
-      terminationGracePeriodSeconds: 30
+      terminationGracePeriodSeconds: 5
