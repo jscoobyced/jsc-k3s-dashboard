@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - "${PWD}/src:/app"
+      - "${PWD}/code/src:/app"
   test:
     build:
       context: ./etc/docker
@@ -18,4 +18,4 @@ services:
       - .env
     user: ${USERID}:${GROUPID}
     volumes:
-      - "${PWD}/src:/app"
+      - "${PWD}/code/cypress:/app"

@@ -1,13 +1,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { K3sNode } from '../models/k3snode'
-import { readablizeBytes } from '../services/format'
+import { K3sNode } from '../domain/nodes/k3snode'
+import { Formatter } from '../services/format'
 import styles from '../styles/Home.module.css'
+import { getNodes} from '../domain/nodes/NodeService'
 
 const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
 
   const nodes = (): JSX.Element[] => {
+    const formatter = Formatter();
     const nodeRows: JSX.Element[] = [];
     if (data === null) return [];
     const allNodes = data.data.sort((a, b) => (a.nodeName > b.nodeName ? 1 : -1));
@@ -16,12 +18,12 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
         <td><Link href={'/node/' + item.nodeName}>{item.nodeName}</Link></td>
         <td>{item.ipAddress}</td>
         <td>{item.capacity.cpu}</td>
-        <td>{readablizeBytes(item.capacity.memory)}</td>
-        <td>{readablizeBytes(item.capacity.storage)}</td>
+        <td>{formatter.readablizeBytes(item.capacity.memory)}</td>
+        <td>{formatter.readablizeBytes(item.capacity.storage)}</td>
         <td>{item.capacity.pods}</td>
         <td>{item.allocatable.cpu}</td>
-        <td>{readablizeBytes(item.allocatable.memory)}</td>
-        <td>{readablizeBytes(item.allocatable.storage)}</td>
+        <td>{formatter.readablizeBytes(item.allocatable.memory)}</td>
+        <td>{formatter.readablizeBytes(item.allocatable.storage)}</td>
         <td>{item.allocatable.pods}</td>
       </tr>);
       nodeRows.push(row);
@@ -76,12 +78,8 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
 }
 
 export const getServerSideProps = async (req: any, resp: any) => {
-  const server = req.req.headers['host'];
-  if (!server) return { props: { data: [] } };
-
-  const res = await fetch(`http://${server}/api/nodes`)
-  const data = await res.json()
-  return { props: { data: data.data } }
+  const nodes = await getNodes()
+  return { props: { data: nodes } }
 }
 
 export default Home

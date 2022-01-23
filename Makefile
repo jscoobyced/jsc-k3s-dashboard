@@ -48,5 +48,8 @@ dev:
 stop:
 	@docker-compose down
 
-tests:
+ui-tests:
 	@docker-compose up --exit-code-from test
+
+unit-tests:
+	yarn --cwd code/src test

@@ -1,25 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { Capacity, K3sNode } from '../../models/k3snode';
-import { rawUnit } from '../../services/format';
-
-type Data = {
-  data?: K3sNode[],
-  error?: string
-}
+import { Formatter } from "../../services/format";
+import { Capacity, K3sNode } from "./k3snode";
 
 const parseResponse = (json: any): K3sNode[] => {
   const nodes: K3sNode[] = [];
+  const formatter = Formatter();
   for (const item of json.items) {
     const capacity: Capacity = {
       cpu: item.status.capacity.cpu,
-      memory: rawUnit(item.status.capacity.memory),
-      storage: rawUnit(item.status.capacity['ephemeral-storage']),
+      memory: formatter.rawUnit(item.status.capacity.memory),
+      storage: formatter.rawUnit(item.status.capacity['ephemeral-storage']),
       pods: item.status.capacity.pods
     }
     const allocatable: Capacity = {
       cpu: item.status.allocatable.cpu,
-      memory: rawUnit(item.status.allocatable.memory),
-      storage: rawUnit(item.status.allocatable['ephemeral-storage']),
+      memory: formatter.rawUnit(item.status.allocatable.memory),
+      storage: formatter.rawUnit(item.status.allocatable['ephemeral-storage']),
       pods: item.status.allocatable.pods
     }
     const node: K3sNode = {
@@ -33,10 +28,7 @@ const parseResponse = (json: any): K3sNode[] => {
   return nodes;
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export const getNodes = async (): Promise<K3sNode[]> => {
   const token = process.env.API_TOKEN as string;
   const mainNodeIp = process.env.MAIN_NODE_IP as string;
   process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
@@ -45,8 +37,11 @@ export default async function handler(
     headers: { 'Authorization': `Bearer ${token}` }
   }
 
-  const result = await fetch(`https://${mainNodeIp}:6443/api/v1/nodes`, options);
-  const json = await result.json();
-  const nodes = parseResponse(json);
-  res.status(200).json({ data: nodes });
+  return fetch(`https://${mainNodeIp}:6443/api/v1/nodes`, options)
+    .then(response => {
+      return response.json()
+        .then(json => {
+          return parseResponse(json)
+        })
+    })
 }

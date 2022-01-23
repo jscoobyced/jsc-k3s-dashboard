@@ -1,3 +1,3 @@
 #!/bin/sh
 
-yarn --cwd /app cypress:headless
+yarn --cwd /app cypress
