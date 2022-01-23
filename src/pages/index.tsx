@@ -42,7 +42,7 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
         <h1 className={styles.title}>
           Welcome to JSC Poor&apos;s man k3s Dashboard
         </h1>
-        <table>
+        <table className='nodes-list'>
           <caption>Nodes list</caption>
           <thead>
             <tr>

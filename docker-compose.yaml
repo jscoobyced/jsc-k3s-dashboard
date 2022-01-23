@@ -6,5 +6,16 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - "${PWD}/src:/app"
+  test:
+    build:
+      context: ./etc/docker
+      dockerfile: Dockerfile.test
+    env_file:
+      - .env
+    user: ${USERID}:${GROUPID}
     volumes:
       - "${PWD}/src:/app"

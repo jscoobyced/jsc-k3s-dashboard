@@ -31,9 +31,6 @@ fi
 # Cache the value for next time.
 echo "${GRACEPERIOD}" > ./.grace
 
-# Deploy in case it wasn't deployed before. Will have no effect if it is already deployed.
-./etc/bin/deploy.sh
-
 # Run the patch command
 kubectl patch deployment --namespace jsc-k3s-dashboard k3s-dashboard \
     -p "{\"spec\":{\"template\":{\"spec\":{\"terminationGracePeriodSeconds\":${GRACEPERIOD}}}}}"

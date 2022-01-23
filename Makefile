@@ -1,27 +1,52 @@
-API_TOKEN:= $(shell ./etc/bin/token.sh Y)
+env:
+	@rm -f .env
+	@echo "API_TOKEN=$(shell ./etc/bin/token.sh Y)" >> .env
+	@echo "MAIN_NODE_IP=$(MAIN_NODE_IP)" >> .env
+	@echo "USERID=$(shell id -u)" >> .env
+	@echo "GROUPID=$(shell id -g)" >> .env
+	@echo "DOCKER_ID=$(DOCKER_ID)" >> .env
+	@echo "SERVICE_IP=$(SERVICE_IP)" >> .env
 
-cleanup:
-	@echo "Deleting all assets."
-	@./etc/bin/cleanup.sh
-
-setup:
+build:	
 	@echo "Building for production"
-	@./etc/bin/build.sh $(DOCKER_ID) Y
-	@echo "Configuring YAML and deploying it"
-	@./etc/bin/first-deploy.sh $(MAIN_NODE_IP) $(DOCKER_ID) $(SERVICE_IP)
+	@./etc/bin/build.sh Y
 
-build:
-	@echo "Building for production"
-	@echo ./etc/bin/build.sh $(DOCKER_ID) Y
+setup-prod:
+	@make build
+	@echo "Configuring YAML"
+	@./etc/bin/pre-deploy.sh
+
+prerequisites:
+	@echo "Installing pre-requisites to cluster"
+	@./etc/bin/permissions.sh
+	@./etc/bin/token.sh
+
+first-deploy:
+	@echo "Deploying to cluster."
+	@./etc/bin/deploy.sh
 
 deploy:
 	@echo "Deploying to cluster."
-	@./etc/bin/redeploy.sh $(DOCKER_ID)
+	@./etc/bin/redeploy.sh
+
+setup-dev:
+	@docker-compose build web test
 
 undeploy:
 	@echo "Undeploying from cluster"
 	@./etc/bin/undeploy.sh
 
+cleanup:
+	@make undeploy
+	@echo "Deleting all assets."
+	@./etc/bin/cleanup.sh
+	@rm .env
+
 dev:
-	@docker-compose build web
-	@docker-compose run --rm -e MAIN_NODE_IP="$(MAIN_NODE_IP)" -e API_TOKEN="$(API_TOKEN)" --service-ports web 
+	@docker-compose up -d web
+
+stop:
+	@docker-compose down
+
+tests:
+	@docker-compose up --exit-code-from test

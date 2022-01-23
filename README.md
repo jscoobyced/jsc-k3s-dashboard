@@ -4,19 +4,17 @@ Initially tested on [Rancher's k3s](https://rancher.com/products/k3s), which inc
 
 ---
 ## Getting Started
+
 ### Dependencies
 
 You need a running docker installation, with `docker-compose`  and `kubectl` commands available.
 
-### New cluster
-
-When using the application for the first time on a cluster, you need to create the service account to access the cluster.  
-Have your cluster up and running, then run the following command:
+The first time, setup the environment variables:
 ```
-make setup MAIN_NODE_IP=<IP of master node> DOCKER_ID=<docker id> SERVICE_IP=<IP of service>
+make prerequisites env MAIN_NODE_IP=<IP of main node> DOCKER_ID=<docker id> SERVICE_IP=<IP of service>
 ```
 Where:
-- `<IP of master node>` is the IP of your master node.
+- `<IP of main node>` is the IP of your cluster main node.
 - `<docker id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
 - `<IP of service>` is the IP address to bind the dashboard application. It should be one of your node IP address.
 
@@ -25,28 +23,60 @@ Where:
 
 Simply run:
 ```
-make dev MAIN_NODE_IP=<IP of master node>
+make dev
 ```
-Where:
-- `<IP of master node>` is the IP of your master node.
 
 You can then browse to http://0.0.0.0:3000
 The application was created using the `create-next-app`, in development mode it has hot redeploy.
 
+To run the tests, run:
+```
+make tests
+```
+
 ---
 ## Production
 
-You can deploy this code on your cluster so it will self monitor the metrics.  
-You will need to have logged-in your docker account on your local machine to be able to push, or to configure your CI environment to be able to push. You can build the image first by running these commands:
-```
-make build DOCKER_ID=<docker id>
-```
-Where:
-- `<docker id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
+You can deploy this code on your cluster so it will self monitor the metrics. 
 
-Run the following command to deploy:
+### Pre-requisites
+
+You need to login from the command line to the docker registry:
 ```
-make deploy
+docker login
+```
+
+This is necessary for your cluster to pull the image we will push there.
+
+### New cluster
+
+When using the application for the first time on a cluster, you need to create the service account to access the cluster.  
+Have your cluster up and running, then run the following command:
+```
+make setup-prod
+```
+
+You should end-up with an output like this:
+  
+![Output sample of the "make setup-prod" command](./doc/img/setup-prod.png)
+
+If everything went well, you can then install the dependencies on your cluster:
+```
+make first-deploy
+```
+This will build the images again but since they are unchanged it should be quick. The output should be something like:
+
+![Output sample of the "make first" command](./doc/img/first-deploy.png)
+
+You should be able to browse to http://&lt;SERVICE_IP&gt;:8080 and see the dashboard:
+
+![Dashboard screenshot](./doc/img/dashboard.png)
+
+### Deployment
+
+Afterwards, you can build and deploy:
+```
+make build deploy
 ```
 
 You can then browse to http://&lt;service IP&gt;:8080
