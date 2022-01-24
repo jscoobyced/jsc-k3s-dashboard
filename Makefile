@@ -20,6 +20,7 @@ prerequisites:
 	@echo "Installing pre-requisites to cluster"
 	@./etc/bin/permissions.sh
 	@./etc/bin/token.sh
+	@openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./code/e2e/data/selfsigned.key -out ./code/e2e/data/selfsigned.crt
 
 first-deploy:
 	@echo "Deploying to cluster."
@@ -30,7 +31,7 @@ deploy:
 	@./etc/bin/redeploy.sh
 
 setup-dev:
-	@docker-compose build web test
+	@docker-compose build web cypress webtest
 
 undeploy:
 	@echo "Undeploying from cluster"
@@ -49,7 +50,8 @@ stop:
 	@docker-compose down
 
 ui-tests:
-	@docker-compose up --exit-code-from test
+	@make setup-dev
+	@docker-compose up --exit-code-from cypress webtest web cypress
 
 unit-tests:
 	yarn --cwd code/src test

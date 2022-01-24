@@ -7,15 +7,23 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - .env.dev
+    depends_on:
+      - webtest
     volumes:
       - "${PWD}/code/src:/app"
-  test:
+  webtest:
+    build:
+      context: .
+      dockerfile: ./etc/docker/Dockerfile.test
+  cypress:
     build:
       context: ./etc/docker
-      dockerfile: Dockerfile.test
+      dockerfile: Dockerfile.cypress
     env_file:
       - .env
     user: ${USERID}:${GROUPID}
+    depends_on:
+      - web
     volumes:
       - "${PWD}/code/cypress:/app"

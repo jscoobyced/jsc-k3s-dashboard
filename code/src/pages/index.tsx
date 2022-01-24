@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { K3sNode } from '../domain/nodes/k3snode'
+import { K3sNode } from '../models/nodes/k3snode'
 import { Formatter } from '../services/format'
 import styles from '../styles/Home.module.css'
-import { getNodes} from '../domain/nodes/NodeService'
+import { getNodes} from '../services/nodes/NodeService'
 
 const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
 

@@ -7,7 +7,7 @@ Initially tested on [Rancher's k3s](https://rancher.com/products/k3s), which inc
 
 ### Dependencies
 
-You need a running docker installation, with `docker-compose`  and `kubectl` commands available.
+Currently the only OS supported is Linux. You need a running docker installation, with `docker-compose` and also `openssl` and `kubectl` commands available.
 
 The first time, setup the environment variables:
 ```
@@ -17,6 +17,11 @@ Where:
 - `<IP of main node>` is the IP of your cluster main node.
 - `<docker id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
 - `<IP of service>` is the IP address to bind the dashboard application. It should be one of your node IP address.
+
+This will create the self-signed SSL certificates for the test. You'll need to fill in some information, make sure you use `webtest` for the `Common Name` questions.
+
+  
+![Output sample of the "openssl" command](./doc/img/openssl.png)
 
 ---
 ## Development
@@ -29,9 +34,19 @@ make dev
 You can then browse to http://0.0.0.0:3000
 The application was created using the `create-next-app`, in development mode it has hot redeploy.
 
-To run the tests, run:
+You can run
 ```
-make tests
+make stop
+```
+when done to avoid leaving containers running.
+
+---
+## Testing
+
+You can run 2 types of tests: unit tests or UI tests:
+```
+make unit-tests
+make ui-tests
 ```
 
 ---

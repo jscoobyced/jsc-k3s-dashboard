@@ -1,0 +1,21 @@
+# Need at least NodeJS version 12.22.0 to run NextJS
+FROM cypress/base:12.22.8
+
+WORKDIR /app
+
+ARG USERID=1000
+ARG GROUPID=1000
+ENV USERID ${USERID}
+ENV GROUPID ${GROUPID}
+
+RUN yarn --cwd /app add cypress
+
+COPY entrypoint-test.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint-test.sh
+
+USER ${USERID}:${GROUPID}
+
+VOLUME ["/app"]
+RUN mkdir /tmp/app && yarn --cwd /tmp/app add cypress -D
+
+ENTRYPOINT [ "entrypoint-test.sh"]

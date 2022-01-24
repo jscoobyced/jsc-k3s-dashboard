@@ -2,6 +2,7 @@
 code/src/.next
 code/cypress/**/videos
 code/cypress/**/screenshots
+code/e2e/data/selfsigned.*
 etc/docker/Dockerfile.arm64
 etc/yaml/jsc-k3s-dashboard/02-deployment.yaml
 etc/yaml/jsc-k3s-dashboard/03-service.yaml

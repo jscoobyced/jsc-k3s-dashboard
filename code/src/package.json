@@ -6,7 +6,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "test": "jest"
+        "test": "yarn lint && jest"
     },
     "dependencies": {
         "@babel/core": "^7.16.12",
