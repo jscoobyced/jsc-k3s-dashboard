@@ -9,8 +9,8 @@ cp ${DOCKER_PATH}/Dockerfile ${DOCKER_PATH}/Dockerfile.arm64
 sed -i 's/FROM node/FROM arm64v8\/node/g' ${DOCKER_PATH}/Dockerfile.arm64
 
 # Build both images
-docker buildx build --platform linux/arm64 -t ${DOCKER_ID}/jsc-k3s-dashboard:arm64-latest -f ${DOCKER_PATH}/Dockerfile.arm64 src
-docker build -t ${DOCKER_ID}/jsc-k3s-dashboard:latest -f ${DOCKER_PATH}/Dockerfile src
+docker buildx build --platform linux/arm64 -t ${DOCKER_ID}/jsc-k3s-dashboard:arm64-latest -f ${DOCKER_PATH}/Dockerfile.arm64 code/src
+docker build -t ${DOCKER_ID}/jsc-k3s-dashboard:latest -f ${DOCKER_PATH}/Dockerfile code/src
 
 # If we pass the "Y" argument, also push to the docker registry
 if [ "${1}" == "Y" ];
