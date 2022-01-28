@@ -11,7 +11,7 @@ services:
     depends_on:
       - webtest
     volumes:
-      - "${PWD}/code/src:/app"
+      - "${PWD}/code/app:/app"
   webtest:
     build:
       context: .

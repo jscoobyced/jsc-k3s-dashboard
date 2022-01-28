@@ -3,42 +3,42 @@ import { Formatter } from "./format"
 describe("readableSize", () => {
     const formatter = Formatter()
 
-    it("can convert negative numbers", () => {
+    it("should return empty string for negative numbers", () => {
         const result = formatter.readablizeBytes(-100)
         expect(result).toEqual("")
     })
 
-    it("can convert 0", () => {
+    it("should return '0 bytes' for zero size", () => {
         const result = formatter.readablizeBytes(0)
         expect(result).toEqual("0 bytes")
     })
 
-    it("can convert to bytes", () => {
+    it("should format 50 to bytes", () => {
         const result = formatter.readablizeBytes(50)
         expect(result).toEqual("50 bytes")
     })
 
-    it("can convert to kb", () => {
+    it("should format kilo to kb ", () => {
         const result = formatter.readablizeBytes(6000)
         expect(result).toEqual("5.86 kB")
     })
 
-    it("can convert to MB", () => {
+    it("should format mb values to MB", () => {
         const result = formatter.readablizeBytes(6000000)
         expect(result).toEqual("5.72 MB")
     })
 
-    it("can convert to GB", () => {
+    it("should format gb values GB", () => {
         const result = formatter.readablizeBytes(6000000000)
         expect(result).toEqual("5.59 GB")
     })
 
-    it("can convert to TB", () => {
+    it("should format tb values TB", () => {
         const result = formatter.readablizeBytes(6000000000000)
         expect(result).toEqual("5.46 TB")
     })
 
-    it("can convert to PB", () => {
+    it("should format pb values PB", () => {
         const result = formatter.readablizeBytes(6000000000000000)
         expect(result).toEqual("5.33 PB")
     })
@@ -47,24 +47,33 @@ describe("readableSize", () => {
 describe("rawUnit", () => {
     const formatter = Formatter()
 
-    it("can convert 0", () => {
+    it("should return 0 if value is negative", () => {
+        const result = formatter.rawUnit("-10 Ki")
+        expect(result).toEqual(0)
+    })
+
+    it("should return 0 for a '0 Ki' value", () => {
         const result = formatter.rawUnit("0 Ki")
         expect(result).toEqual(0)
     })
 
-    it("can convert from Ki", () => {
+    it("should convert '6 Ki' correctly", () => {
         const result = formatter.rawUnit("6 Ki")
         expect(result).toEqual(6144)
     })
 
-    it("can convert to Mi", () => {
+    it("should convert '6 Mi' correctly", () => {
         const result = formatter.rawUnit("6 Mi")
         expect(result).toEqual(6291456)
     })
 
-    it("can convert to Gi", () => {
+    it("should convert '6 Gi' correctly", () => {
         const result = formatter.rawUnit("6 Gi")
         expect(result).toEqual(6442450944)
+    })
+    it("should return 0 if not a parseable value", () => {
+        const result = formatter.rawUnit("bla ba blaaa")
+        expect(result).toEqual(0)
     })
 })
 

@@ -102,3 +102,8 @@ make deploy DOCKER_ID=<docker id>
 ```
 Where:
 - `<docker id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
+
+---
+## Testing
+
+See [testing.md](./doc/testing.md)

@@ -44,7 +44,7 @@ cleanup:
 	@rm .env
 
 dev:
-	@docker-compose up -d web
+	@docker-compose up -d web webtest
 
 stop:
 	@docker-compose down
@@ -54,4 +54,8 @@ ui-tests:
 	@docker-compose up --exit-code-from cypress webtest web cypress
 
 unit-tests:
-	yarn --cwd code/src test
+	yarn --cwd code/app test $(COVERAGE)
+
+ci:
+	@make ui-tests
+	@COVERAGE="--coverage --coverageFrom='./src/'" make unit-tests

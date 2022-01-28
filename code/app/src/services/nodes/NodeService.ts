@@ -1,8 +1,10 @@
 import { Formatter } from "../format";
 import { Capacity, K3sNode } from "../../models/nodes/k3snode";
 import { K3sNodesResponse } from "./K3sNodesResponse";
+import { Fetch } from "../../models/fetch";
 
 const parseResponse = (json: K3sNodesResponse): K3sNode[] => {
+  if (!json.items) return [];
   const nodes: K3sNode[] = [];
   const formatter = Formatter();
   for (const item of json.items) {
@@ -30,10 +32,8 @@ const parseResponse = (json: K3sNodesResponse): K3sNode[] => {
 }
 
 export const getNodes = async (
-  _fetch: (
-    input: RequestInfo,
-    init?: RequestInit | undefined)
-    => Promise<Response> = global.fetch): Promise<K3sNode[]> => {
+  /* istanbul ignore next */
+  _fetch: Fetch = global.fetch): Promise<K3sNode[]> => {
   const token = process.env.API_TOKEN as string;
   const mainNodeIp = process.env.MAIN_NODE_IP as string;
   process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
@@ -44,9 +44,14 @@ export const getNodes = async (
 
   return _fetch(`https://${mainNodeIp}:6443/api/v1/nodes`, options)
     .then(response => {
-      return response.json()
-        .then(json => {
-          return parseResponse(json)
-        })
+      if (response.status === 200) {
+        return response.json()
+          .then(json => {
+            return parseResponse(json)
+          })
+      } else {
+        return []
+      }
     })
+    .catch(() => [])
 }
