@@ -1,3 +1,5 @@
+TAG := $(shell git describe --tags --abbrev=0 --exact-match)
+
 env:
 	@rm -f .env
 	@echo "API_TOKEN=$(shell ./etc/bin/token.sh Y)" >> .env
@@ -6,6 +8,7 @@ env:
 	@echo "GROUPID=$(shell id -g)" >> .env
 	@echo "DOCKER_ID=$(DOCKER_ID)" >> .env
 	@echo "SERVICE_IP=$(SERVICE_IP)" >> .env
+	@echo "TAG=$(shell git describe --tags --abbrev=0 --exact-match)" >> .env
 
 build:	
 	@echo "Building for production"
@@ -31,6 +34,8 @@ deploy:
 	@./etc/bin/redeploy.sh
 
 setup-dev:
+	yarn --cwd code/app install
+	yarn --cwd code/app test
 	@docker-compose build web cypress webtest
 
 undeploy:
@@ -44,6 +49,7 @@ cleanup:
 	@rm .env
 
 dev:
+	@sed -i "s/TAG=.*/TAG=$(TAG)/g" .env.dev
 	@docker-compose up -d web webtest
 
 stop:
@@ -57,5 +63,6 @@ unit-tests:
 	yarn --cwd code/app test $(COVERAGE)
 
 ci:
+	@make stop
 	@make ui-tests
 	@COVERAGE="--coverage --coverageFrom='./src/'" make unit-tests

@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { K3sNode } from '../models/nodes/k3snode'
 import { Formatter } from '../services/format'
 import styles from '../styles/Home.module.css'
-import { getNodes} from '../services/nodes/NodeService'
+import { getNodes } from '../services/nodes/NodeService'
+import { getAppConfiguration } from '../services/config/AppConfiguration'
+import { AppConfigurationResponse } from '../services/config/AppConfigurationResponse'
 
-const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
+const Home: NextPage<{ data: K3sNode[], config: AppConfigurationResponse }> = (data: { data: K3sNode[], config: AppConfigurationResponse }) => {
 
   const nodes = (): JSX.Element[] => {
     const formatter = Formatter();
@@ -30,6 +32,8 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
     }
     return nodeRows;
   }
+
+  const tag = data.config.tag.length === 0 ? "" : "- v" + data.config.tag
 
   return (
     <div className={styles.container}>
@@ -71,7 +75,7 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
       </main>
 
       <footer className={styles.footer}>
-        &copy; Cédric ROCHEFOLLE - 2022
+        &copy; Cédric ROCHEFOLLE - 2022 {tag}
       </footer>
     </div>
   )
@@ -79,7 +83,8 @@ const Home: NextPage<{ data: K3sNode[] }> = (data: { data: K3sNode[] }) => {
 
 export const getServerSideProps = async (req: any, resp: any) => {
   const nodes = await getNodes()
-  return { props: { data: nodes } }
+  const config = await getAppConfiguration()
+  return { props: { data: nodes, config } }
 }
 
 export default Home
