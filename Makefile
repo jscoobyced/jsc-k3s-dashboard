@@ -8,7 +8,7 @@ env:
 	@echo "GROUPID=$(shell id -g)" >> .env
 	@echo "DOCKER_ID=$(DOCKER_ID)" >> .env
 	@echo "SERVICE_IP=$(SERVICE_IP)" >> .env
-	@echo "TAG=$(shell git describe --tags --abbrev=0 --exact-match)" >> .env
+	@echo "TAG=$(TAG)" >> .env
 
 build:	
 	@echo "Building for production"
@@ -33,11 +33,6 @@ deploy:
 	@echo "Deploying to cluster."
 	@./etc/bin/redeploy.sh
 
-setup-dev:
-	yarn --cwd code/app install
-	yarn --cwd code/app test
-	@docker-compose build web cypress webtest
-
 undeploy:
 	@echo "Undeploying from cluster"
 	@./etc/bin/undeploy.sh
@@ -48,8 +43,19 @@ cleanup:
 	@./etc/bin/cleanup.sh
 	@rm .env
 
+init-dev-env:
+	@cp .env.example .env.dev
+	@echo "TAG=$(TAG)" >> .env.dev
+
+setup-dev:
+	@make init-dev-env
+	@yarn --cwd code/app install
+	@yarn --cwd code/app lint
+	@yarn --cwd code/app jest --silent --listTests
+	@docker-compose build web cypress webtest
+
 dev:
-	@sed -i "s/TAG=.*/TAG=$(TAG)/g" .env.dev
+	@make init-dev-env
 	@docker-compose up -d web webtest
 
 stop:
