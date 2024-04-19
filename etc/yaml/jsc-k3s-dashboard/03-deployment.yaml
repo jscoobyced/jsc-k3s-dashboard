@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: k3s-dashboard
-  namespace: jsc-k3s-dashboard
+  namespace: jsc-k3s-dashboard-ns
   labels:
     app: k3s-dashboard
     component: k3s-dashboard
@@ -11,33 +11,33 @@ spec:
   selector:
     matchLabels:
       app: k3s-dashboard
-      component: k3s-dashboard
+      tier: frontend
   template:
     metadata:
       labels:
         app: k3s-dashboard
-        component: k3s-dashboard
+        tier: frontend
     spec:
       containers:
       - name: k3s-dashboard
-        image: DOCKERID/jsc-k3s-dashboard:latest
+        image: jscdroiddev/jsc-k3s-dashboard:latest
         imagePullPolicy: Always
-        securityContext:
-          runAsUser: 1001
-          runAsGroup: 1001
-          privileged: false
         env:
         - name: TZ
           value: "Asia/Bangkok"
-        - name: MAIN_NODE_IP
-          value: "IPADDRESS"
+        - name: SERVER_URL
+          valueFrom:
+            secretKeyRef:
+              name: jsc-k3s-secret
+              key: server_url
         - name: API_TOKEN
           valueFrom:
             secretKeyRef:
-              name: jsc-api-token
-              key: token
+              name: jsc-k3s-secret
+              key: api_token
         ports:
           - containerPort: 3000
+            name: k3s-dashboard
         resources:
           limits:
             cpu: "500m"

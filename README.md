@@ -11,17 +11,16 @@ Currently the only OS supported is Linux. You need a running docker installation
 
 The first time, setup the environment variables:
 ```
-make prerequisites env MAIN_NODE_IP=<IP of main node> DOCKER_ID=<docker id> SERVICE_IP=<IP of service>
+make setup
 ```
-Where:
-- `<IP of main node>` is the IP of your cluster main node.
-- `<docker id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
-- `<IP of service>` is the IP address to bind the dashboard application. It should be one of your node IP address.
 
-This will create the self-signed SSL certificates for the test. You'll need to fill in some information, make sure you use `webtest` for the `Common Name` questions.
+This will first check if you have a valid k8s configuration. If you haven't, it will try installing one node with `minikube`. If `minikube` isn't available it will fail and stop. This will also create the self-signed SSL certificates for the test.
 
-  
-![Output sample of the "openssl" command](./doc/img/openssl.png)
+If you need to start over, run:
+```
+make clean
+make setup
+```
 
 ---
 ## Development
@@ -41,67 +40,26 @@ make stop
 when done to avoid leaving containers running.
 
 ---
-## Testing
-
-You can run 2 types of tests: unit tests or UI tests:
-```
-make unit-tests
-make ui-tests
-```
-
----
 ## Production
 
 You can deploy this code on your cluster so it will self monitor the metrics. 
 
 ### Pre-requisites
 
-You need to login from the command line to the docker registry:
-```
-docker login
-```
+You need to add in your repository 2 secret environment variables to push the image to docker hub:
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`
 
-This is necessary for your cluster to pull the image we will push there.
-
-### New cluster
-
-When using the application for the first time on a cluster, you need to create the service account to access the cluster.  
-Have your cluster up and running, then run the following command:
-```
-make setup-prod
-```
-
-You should end-up with an output like this:
-  
-![Output sample of the "make setup-prod" command](./doc/img/setup-prod.png)
-
-If everything went well, you can then install the dependencies on your cluster:
-```
-make first-deploy
-```
-This will build the images again but since they are unchanged it should be quick. The output should be something like:
-
-![Output sample of the "make first" command](./doc/img/first-deploy.png)
-
-You should be able to browse to http://&lt;SERVICE_IP&gt;:8080 and see the dashboard:
-
-![Dashboard screenshot](./doc/img/dashboard.png)
+You need to obtain them from your docker account. This is necessary for pushing the images to Docker hub. Note the build in Github will automatically occur when you create a release following SEMVER format (i.e. tag and release names are `vX.Y.Z`)
 
 ### Deployment
 
-Afterwards, you can build and deploy:
+When build is succesful on Github actions, you can deploy
 ```
-make build deploy
+make deploy
 ```
 
-You can then browse to http://&lt;service IP&gt;:8080
-
-You can combine a build and deploy by adding the main node IP address to the deploy command:
-```
-make deploy DOCKER_ID=<docker id>
-```
-Where:
-- `<docker id>` is the id of your docker repository (not the email address). It is used to create the name of the docker image.
+This will deploy to the cluster that is currently configured with you `kubectl` configuration. You might want to change the tag from `latest` to a specific version in the [03-deployment.yaml](./etc/yaml/03-deployment.yaml) file.
 
 ---
 ## Testing

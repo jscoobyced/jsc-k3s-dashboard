@@ -1,0 +1,5 @@
+resources:
+  - 01-setup.yaml
+  - 02-secret.yaml
+  - 03-deployment.yaml
+  - 04-service.yaml
