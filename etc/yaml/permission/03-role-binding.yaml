@@ -3,6 +3,7 @@ kind: ClusterRoleBinding
 
 metadata:
   name: jsc-cluster-role-binding
+  namespace: default
 
 roleRef:
   kind: ClusterRole

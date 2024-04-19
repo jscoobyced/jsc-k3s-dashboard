@@ -19,5 +19,5 @@ app.get('/api/v1/nodes', (req, res) => {
   res.json(jsonNodes);
 });
 
-httpServer.listen(6000);
-httpsServer.listen(6443);
+httpServer.listen(8000);
+httpsServer.listen(8443);

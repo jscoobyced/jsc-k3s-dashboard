@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: k3s-dashboard
-        image: DOCKERID/jsc-k3s-dashboard:arm64-latest
+        image: DOCKERID/jsc-k3s-dashboard:latest
         imagePullPolicy: Always
         securityContext:
           runAsUser: 1001

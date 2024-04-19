@@ -1,6 +1,6 @@
 # JSC Poor man's Kubernetes Dashboard
 
-Initially tested on [Rancher's k3s](https://rancher.com/products/k3s), which includes by default the metrics services. It should work on any kubernetes implementation, but you might have to add the metrics services if they are not already there.
+Initially tested on [Rancher's k3s](https://rancher.com/products/k3s), which includes by default the metrics services. It should work on any kubernetes implementation, but you might have to add the metrics services if they are not already there (for minikube, run `minikube addons enable metrics-server`)
 
 ---
 ## Getting Started

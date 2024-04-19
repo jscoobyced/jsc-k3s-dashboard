@@ -1,0 +1,13 @@
+@types/node
+@types/react
+@types/react-dom
+@typescript-eslint/eslint-plugin
+@typescript-eslint/parser
+autoprefixer
+eslint@8.57.0
+eslint-config-next
+eslint-config-prettier
+postcss
+start-server-and-test
+tailwindcss
+typescript

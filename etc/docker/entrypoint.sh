@@ -1,3 +1,3 @@
 #!/bin/sh
 
-MAIN_NODE_IP="${MAIN_NODE_IP}" API_TOKEN="${API_TOKEN}" yarn dev
+SERVER_URL="${SERVER_URL}" API_TOKEN="${API_TOKEN}" GIT_TAG="${GIT_TAG}" yarn dev

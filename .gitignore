@@ -1,12 +1,44 @@
+# dependencies
 **/node_modules
-code/app/.next
-code/app/coverage
-code/cypress/**/videos
-code/cypress/**/screenshots
-code/e2e/data/selfsigned.*
-etc/docker/Dockerfile.arm64
-etc/yaml/jsc-k3s-dashboard/02-deployment.yaml
-etc/yaml/jsc-k3s-dashboard/03-service.yaml
-.env
-.env.dev
-.grace
+**/.pnp
+**/.pnp.js
+
+# testing
+**/coverage
+
+# next.js
+**/.next/
+**/out/
+
+# production
+**/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# local env files
+**/.env*.local
+**/.env
+**/.env.dev
+
+# vercel
+**/.vercel
+
+# local certificates
+server.cert
+server.key
+
+# typescript
+**/*.tsbuildinfo
+**/next-env.d.ts
+
+# cypress
+**/cypress/screenshots
+**/cypress/videos
+**/cache

@@ -3,6 +3,7 @@ kind: ClusterRole
 
 metadata:
   name: jsc-cluster-role
+  namespace: default
 
 rules:
   - apiGroups: [""]

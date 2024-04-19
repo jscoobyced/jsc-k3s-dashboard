@@ -1,21 +1,23 @@
-FROM node:16-alpine
+FROM node:20-alpine
 RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ARG MAIN_NODE_IP
+ARG SERVER_URL
 ARG API_TOKEN
+ARG GIT_TAG
 
 ENV NODE_ENV development
 ENV PORT 3000
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV MAIN_NODE_IP ${MAIN_NODE_IP}
+ENV SERVER_URL ${SERVER_URL}
 ENV API_TOKEN ${API_TOKEN}
+ENV GIT_TAG ${GIT_TAG}
 
 EXPOSE 3000
 
 VOLUME ["/app"]
 
-ENTRYPOINT [ "entrypoint.sh", "${MAIN_NODE_IP}", "${API_TOKEN}"]
+ENTRYPOINT [ "entrypoint.sh"]

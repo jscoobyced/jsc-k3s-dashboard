@@ -11,19 +11,8 @@ services:
     depends_on:
       - webtest
     volumes:
-      - "${PWD}/code/app:/app"
+      - "${PWD}/code/website:/app"
   webtest:
     build:
       context: .
       dockerfile: ./etc/docker/Dockerfile.test
-  cypress:
-    build:
-      context: ./etc/docker
-      dockerfile: Dockerfile.cypress
-    env_file:
-      - .env
-    user: ${USERID}:${GROUPID}
-    depends_on:
-      - web
-    volumes:
-      - "${PWD}/code/cypress:/app"
