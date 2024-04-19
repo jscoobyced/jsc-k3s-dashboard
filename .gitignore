@@ -28,7 +28,7 @@
 **/.env.dev
 
 # Secrets
-**/secret.yaml
+**/*-secret.yaml
 
 # vercel
 **/.vercel
