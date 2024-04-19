@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: jsc-k3s-dashboard-ns
+  name: jsc-ns

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: k3s-dashboard
-  namespace: jsc-k3s-dashboard-ns
+  namespace: jsc-ns
   labels:
     app: k3s-dashboard
     component: k3s-dashboard
