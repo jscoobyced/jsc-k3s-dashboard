@@ -23,8 +23,13 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN addgroup -g 1000 -S nodejs
-RUN adduser -S nextjs -u 1000
+ARG USERID=1001
+ARG GROUPID=1001
+ENV USERID ${USERID}
+ENV GROUPID ${GROUPID}
+
+RUN addgroup -g ${GROUPID} -S nodejs
+RUN adduser -S nextjs -u ${USERID}
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
