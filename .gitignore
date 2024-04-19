@@ -26,13 +26,14 @@
 **/.env*.local
 **/.env
 **/.env.dev
+**/Dockerfile.arm64
 
 # vercel
 **/.vercel
 
 # local certificates
-server.cert
-server.key
+**/selfsigned.crt
+**/selfsigned.key
 
 # typescript
 **/*.tsbuildinfo

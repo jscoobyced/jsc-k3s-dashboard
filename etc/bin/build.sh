@@ -5,10 +5,6 @@ source .env
 
 DOCKER_PATH=etc/docker
 
-# Create ARM64 Dockerfile from the amd64 default version
-cp ${DOCKER_PATH}/Dockerfile ${DOCKER_PATH}/Dockerfile.arm64
-sed -i 's/FROM node/FROM arm64v8\/node/g' ${DOCKER_PATH}/Dockerfile.arm64
-
 DOCKER_PUSH=
 TAG=${GIT_TAG}
 

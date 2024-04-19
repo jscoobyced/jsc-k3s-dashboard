@@ -7,6 +7,10 @@ RUN yarn install --frozen-lockfile
 
 FROM node:20-alpine AS builder
 WORKDIR /app
+ARG GIT_TAG
+ENV GIT_TAG ${GIT_TAG}
+
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY app app
 COPY styles styles
