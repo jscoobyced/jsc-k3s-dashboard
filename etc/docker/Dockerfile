@@ -23,8 +23,8 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+RUN addgroup -g 1000 -S nodejs
+RUN adduser -S nextjs -u 1000
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json

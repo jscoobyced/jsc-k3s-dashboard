@@ -18,3 +18,5 @@ then
 fi
 
 echo "Cluster and configuration removed."
+
+rm -f .env ./code/e2e/data/selfsigned.key ./code/e2e/data/selfsigned.crt

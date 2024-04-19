@@ -1,9 +1,10 @@
 .PHONY: .setup
+UID:= $(shell id -u)
+GID:= $(shell id -g)
 
 cleanup:
 	@echo "Deleting all assets."
 	@./etc/bin/cleanup.sh
-	@rm -f .env
 
 .env:
 	@./etc/bin/env.sh
@@ -17,10 +18,10 @@ cleanup:
 setup: .setup .env
 
 dev:
-	@docker-compose up -d web webtest
+	UID=$(UID) GID=$(GID) docker-compose up -d web webtest
 
 stop:
-	@docker-compose down
+	UID=$(UID) GID=$(GID) docker-compose down
 
 deploy:
 	@echo "Deploying to cluster."
