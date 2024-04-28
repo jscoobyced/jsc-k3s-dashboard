@@ -27,8 +27,9 @@
 **/.env
 **/.env.dev
 
-# Secrets
+# YAML
 **/*-secret.yaml
+**/*-service.yaml
 
 # vercel
 **/.vercel
