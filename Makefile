@@ -2,7 +2,7 @@
 UID:= $(shell id -u)
 GID:= $(shell id -g)
 
-cleanup:
+clean:
 	@echo "Deleting all assets."
 	@./etc/bin/cleanup.sh
 
@@ -12,13 +12,12 @@ cleanup:
 .setup:
 	@./etc/bin/setup_k8s.sh
 	@./etc/bin/setup.sh
-	@openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=TH/ST=Bangkok/L=Bangkok/O=R&D/CN=webtest" -keyout ./code/e2e/data/selfsigned.key -out ./code/e2e/data/selfsigned.crt
-	@docker-compose build web webtest
+	@docker-compose build web
 
 setup: .setup .env
 
 dev:
-	UID=$(UID) GID=$(GID) docker-compose up -d web webtest
+	UID=$(UID) GID=$(GID) docker-compose up -d web
 
 stop:
 	UID=$(UID) GID=$(GID) docker-compose down

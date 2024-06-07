@@ -59,7 +59,7 @@ When build is succesful on Github actions, you can deploy
 make deploy
 ```
 
-This will deploy to the cluster that is currently configured with you `kubectl` configuration. You might want to change the tag from `latest` to a specific version in the [03-deployment.yaml](./etc/yaml/03-deployment.yaml) file.
+This will deploy to the cluster that is currently configured with you `kubectl` configuration. You might want to change the tag from `latest` to a specific version in the [03-deployment.yaml](./etc/yaml/jsc-k3s-dashboard/03-deployment.yaml) file.
 
 ---
 ## Testing

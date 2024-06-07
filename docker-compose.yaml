@@ -8,12 +8,12 @@ services:
       - "3000:3000"
     user: "${UID}:${GID}"
     env_file:
-      - .env.dev
-    depends_on:
-      - webtest
+      - .env
     volumes:
       - "${PWD}/code/website:/app"
-  webtest:
-    build:
-      context: .
-      dockerfile: ./etc/docker/Dockerfile.test
+    networks:
+      - minikube
+
+networks:
+  minikube:
+    external: true

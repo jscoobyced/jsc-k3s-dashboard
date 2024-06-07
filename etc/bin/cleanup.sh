@@ -10,7 +10,6 @@ kubectl delete -f ./etc/yaml/permission/01-service-account.yaml &> /dev/null
 
 rm ./etc/yaml/jsc-k3s-dashboard/02-deployment.yaml &> /dev/null
 rm ./etc/yaml/jsc-k3s-dashboard/03-service.yaml &> /dev/null
-rm ./code/e2e/data/selfsigned.* &> /dev/null
 
 if [ -f ~/.kube/config ];
 then
@@ -18,5 +17,3 @@ then
 fi
 
 echo "Cluster and configuration removed."
-
-rm -f .env ./code/e2e/data/selfsigned.key ./code/e2e/data/selfsigned.crt

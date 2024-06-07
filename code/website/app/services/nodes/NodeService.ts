@@ -41,7 +41,10 @@ export const getNodes = async (): Promise<K3sNode[]> => {
     headers: { Authorization: `Bearer ${token}` },
   }
 
-  return fetch(`${serverUrl}/api/v1/nodes`, options)
+  const nodesUrl = `${serverUrl}/api/v1/nodes`
+  console.log(nodesUrl)
+
+  return fetch(nodesUrl, options)
     .then((response) => {
       if (response.status === 200) {
         return response.json().then((json) => {
