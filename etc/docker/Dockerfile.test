@@ -1,7 +1,0 @@
-FROM node:20-alpine
-
-WORKDIR /app
-COPY code/e2e/ .
-RUN yarn install
-
-CMD ["yarn", "start"]
