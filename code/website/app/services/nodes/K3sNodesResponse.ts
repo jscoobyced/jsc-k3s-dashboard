@@ -2,31 +2,38 @@ export type K3sNodesResponse = {
   items: [
     {
       metadata: {
-        name: string;
+        name: string
         annotations: {
-          "k3s.io/internal-ip": string;
-        };
-      };
+          'k3s.io/internal-ip': string
+        }
+      }
       status: {
         addresses: [
           {
-            address: string;
-            type: string;
+            address: string
+            type: string
           }
-        ];
+        ]
         allocatable: {
-          cpu: number;
-          memory: string;
-          "ephemeral-storage": string;
-          pods: number;
-        };
+          cpu: number
+          memory: string
+          'ephemeral-storage': string
+          pods: number
+        }
         capacity: {
-          cpu: number;
-          memory: string;
-          "ephemeral-storage": string;
-          pods: number;
-        };
-      };
+          cpu: number
+          memory: string
+          'ephemeral-storage': string
+          pods: number
+        }
+        conditions: [
+          {
+            type: string
+            status: string
+            message: string
+          }
+        ]
+      }
     }
-  ];
-};
+  ]
+}

@@ -1,7 +1,7 @@
 'use server'
 
 import { Formatter } from '../format'
-import { Capacity, K3sNode } from '../../models/nodes/k3snode'
+import { Capacity, K3sNode, NodeCondition } from '../../models/nodes/k3snode'
 import { K3sNodesResponse } from './K3sNodesResponse'
 
 const parseResponse = (json: K3sNodesResponse): K3sNode[] => {
@@ -21,11 +21,22 @@ const parseResponse = (json: K3sNodesResponse): K3sNode[] => {
       storage: formatter.rawUnit(item.status.allocatable['ephemeral-storage']),
       pods: item.status.allocatable.pods,
     }
+    const nodeConditions: NodeCondition[] = []
+    for (const condition of item.status.conditions) {
+      const nodeCondition: NodeCondition = {
+        type: condition.type,
+        status: condition.status,
+        message: condition.message,
+      }
+      nodeConditions.push(nodeCondition)
+    }
+
     const node: K3sNode = {
       nodeName: item.metadata.name,
       ipAddress: item.status.addresses[0].address,
       capacity,
       allocatable,
+      conditions: nodeConditions,
     }
     nodes.push(node)
   }
@@ -42,7 +53,6 @@ export const getNodes = async (): Promise<K3sNode[]> => {
   }
 
   const nodesUrl = `${serverUrl}/api/v1/nodes`
-  console.log(nodesUrl)
 
   return fetch(nodesUrl, options)
     .then((response) => {
