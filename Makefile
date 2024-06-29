@@ -1,4 +1,4 @@
-.PHONY: .setup
+.PHONY: .setup .env
 UID:= $(shell id -u)
 GID:= $(shell id -g)
 
@@ -25,6 +25,9 @@ stop:
 deploy:
 	@echo "Deploying to cluster."
 	@./etc/bin/deploy.sh
+
+api:
+	@./etc/bin/api.sh
 
 undeploy:
 	@echo "Deleting from cluster."

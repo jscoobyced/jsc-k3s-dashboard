@@ -9,3 +9,5 @@ echo "USERID=$(id -u)" >> .env
 echo "GROUPID=$(id -g)" >> .env
 echo "DOCKER_ID=$(docker-credential-$DOCKER_CREDENTIAL list | jq -r '. | to_entries[] | select(.key | contains("docker.io")) | last(.value)')" >> .env
 echo "GIT_TAG=$TAG" >> .env
+
+echo "Environment variables set in .env file"
