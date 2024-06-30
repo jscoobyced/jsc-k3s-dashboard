@@ -1,7 +1,8 @@
 import { K3sNodeMetric } from "../../models/nodes/k3snode"
+import { NodeMetricsResponse } from "./K3sNodesResponse"
 import { HttpOptions, NODE_METRICS_URL, ServerUrl } from "./api"
 
-const parseNodeMetricsResponse = (nodeMetricsResponse: any): K3sNodeMetric => {
+const parseNodeMetricsResponse = (nodeMetricsResponse: NodeMetricsResponse): K3sNodeMetric => {
     const nodeMetric: K3sNodeMetric = {
       metadata: {
         name: nodeMetricsResponse.metadata.name,
@@ -14,7 +15,7 @@ const parseNodeMetricsResponse = (nodeMetricsResponse: any): K3sNodeMetric => {
     return nodeMetric
   }
   
-export const getNodeMetrics = async (nodeName: string, ): Promise<K3sNodeMetric> => {
+export const getNodeMetrics = async (nodeName: string): Promise<K3sNodeMetric> => {
     const nodesUrl = `${ServerUrl}${NODE_METRICS_URL}/${nodeName}`
     const noMetrics = {
       metadata: { name: 'No Metrics' },

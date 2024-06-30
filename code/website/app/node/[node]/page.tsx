@@ -15,6 +15,7 @@ const Page = ({ params }: { params: { node: string } }) => {
     conditions: [],
     ipAddress: '',
     nodeName: '',
+    metrics: { metadata: { name: '' }, usage: { cpu: '', memory: '' } },
   }
   const [node, setNode] = useState(emptyNode)
 

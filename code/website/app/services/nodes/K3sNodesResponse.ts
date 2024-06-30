@@ -37,3 +37,13 @@ export type K3sNodesResponse = {
     }
   ]
 }
+
+export type NodeMetricsResponse = {
+  metadata: {
+    name: string
+  }
+  usage: {
+    cpu: string
+    memory: string
+  }
+}
