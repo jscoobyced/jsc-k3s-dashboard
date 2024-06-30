@@ -21,6 +21,8 @@ const getNodesTable = (nodes: K3sNode[]): JSX.Element[] => {
         <td>{formatter.readablizeBytes(item.allocatable.memory)}</td>
         <td>{formatter.readablizeBytes(item.allocatable.storage)}</td>
         <td>{item.allocatable.pods}</td>
+        <td>{formatter.readableCpuMetric(item.metrics.usage.cpu)}</td>
+        <td>{formatter.readableMemoryMetric(item.metrics.usage.memory)}</td>
       </tr>
     )
     nodeRows.push(row)
@@ -39,6 +41,7 @@ const NodeList = (props: { nodes: K3sNode[] }) => {
           <th rowSpan={2}>Node Name</th>
           <th colSpan={4}>Capacity</th>
           <th colSpan={4}>Allocatable</th>
+          <th colSpan={2}>Usage</th>
         </tr>
         <tr>
           <th>CPU</th>
@@ -49,6 +52,8 @@ const NodeList = (props: { nodes: K3sNode[] }) => {
           <th>Memory</th>
           <th>Storage</th>
           <th>Pods</th>
+          <th>CPU</th>
+          <th>Memory</th>
         </tr>
       </thead>
       <tbody>{getNodesTable(nodes)}</tbody>

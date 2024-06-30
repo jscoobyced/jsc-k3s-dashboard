@@ -35,3 +35,6 @@ undeploy:
 
 build:
 	@./etc/bin/build.sh
+
+build-push:
+	@./etc/bin/build.sh Y
