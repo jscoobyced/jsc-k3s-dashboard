@@ -7,6 +7,9 @@ import { getNodes } from '../../services/nodes/NodeService'
 import NodeConditions from '../../components/kube/NodeConditions'
 import '../../../styles/dashboard.css'
 import Link from 'next/link'
+import PodList from '../../components/kube/PodList'
+import { getPods } from '../../services/pods/PodService'
+import { K3sPod } from '../../models/pods/k3spod'
 
 const Page = ({ params }: { params: { node: string } }) => {
   const emptyNode: K3sNode = {
@@ -18,12 +21,14 @@ const Page = ({ params }: { params: { node: string } }) => {
     metrics: { metadata: { name: '' }, usage: { cpu: '', memory: '' } },
   }
   const [node, setNode] = useState(emptyNode)
+  const [pods, setPods] = useState([] as K3sPod[])
 
   const nodeName = params.node
 
   const content = (
     <>
       <NodeConditions node={node} />
+      <PodList pods={pods} />
       <div className="mx-auto text-right">
         <Link href={'/dashboard'}>Back</Link>
       </div>
@@ -36,7 +41,14 @@ const Page = ({ params }: { params: { node: string } }) => {
       const node = nodes.find((node) => node.nodeName === nodeName) || emptyNode
       setNode(node)
     }
+    const getCurrentPods = async () => {
+      const pods = await getPods(nodeName)
+      setPods(pods)
+    }
     getCurrentNodes().catch((error) => {
+      console.error(error)
+    })
+    getCurrentPods().catch((error) => {
       console.error(error)
     })
   }, [])

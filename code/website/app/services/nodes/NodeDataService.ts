@@ -7,7 +7,7 @@ import {
 import { Formatter } from '../format'
 import { K3sNodesResponse } from './K3sNodesResponse'
 import { getNodeMetrics } from './NodeMetricsService'
-import { HttpOptions, NODE_URL, ServerUrl } from './api'
+import { HttpOptions, NODES_URL, ServerUrl } from '../api'
 
 const parseNodeResponse = async (
   nodeResponse: K3sNodesResponse
@@ -54,7 +54,7 @@ const parseNodeResponse = async (
 }
 
 export const getNodesData = async (): Promise<K3sNode[]> => {
-  const nodesUrl = `${ServerUrl}${NODE_URL}`
+  const nodesUrl = `${ServerUrl}${NODES_URL}`
 
   return fetch(nodesUrl, HttpOptions)
     .then((response) => {

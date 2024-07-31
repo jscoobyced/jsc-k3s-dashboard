@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col mx-auto text-xl pt-10 md:w-3/5 w-4/5">
+    <div className="flex flex-col mx-auto text-xl pt-10 w-4/5">
       {children}
     </div>
   )

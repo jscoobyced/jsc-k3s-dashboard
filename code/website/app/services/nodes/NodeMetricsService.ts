@@ -1,6 +1,6 @@
 import { K3sNodeMetric } from "../../models/nodes/k3snode"
 import { NodeMetricsResponse } from "./K3sNodesResponse"
-import { HttpOptions, NODE_METRICS_URL, ServerUrl } from "./api"
+import { HttpOptions, NODE_METRICS_URL, ServerUrl } from "../api"
 
 const parseNodeMetricsResponse = (nodeMetricsResponse: NodeMetricsResponse): K3sNodeMetric => {
     const nodeMetric: K3sNodeMetric = {
