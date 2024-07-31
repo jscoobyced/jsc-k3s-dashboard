@@ -7,13 +7,13 @@ module.exports = {
         xs: '389px',
         sm: '640px',
         md: '820px',
-        lg: '1000px'
+        lg: '1000px',
       },
       colors: {
         primary: {
           bg: 'rgb(10, 10, 10)',
-          color: 'rgb(80, 80, 80)',
-          link: 'rgb(77, 195, 255)'
+          color: 'rgb(130, 140, 160)',
+          link: 'rgb(77, 195, 255)',
         },
         secondary: {
           bg: 'rgb(32, 32, 32)',
@@ -33,4 +33,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

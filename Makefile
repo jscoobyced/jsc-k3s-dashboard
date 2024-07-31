@@ -1,26 +1,25 @@
 .PHONY: .setup .env
-UID:= $(shell id -u)
-GID:= $(shell id -g)
+K3UID:= $(shell id -u)
+K3GID:= $(shell id -g)
 
 clean:
 	@echo "Deleting all assets."
 	@./etc/bin/cleanup.sh
 
-.env:
-	@./etc/bin/env.sh
-
 .setup:
 	@./etc/bin/setup_k8s.sh
+	@./etc/bin/env.sh
 	@./etc/bin/setup.sh
-	@docker-compose build web
 
-setup: .setup .env
+setup: .setup
+
+reset: clean setup
 
 dev:
-	UID=$(UID) GID=$(GID) docker-compose up -d web
+	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose up web db -d
 
 stop:
-	UID=$(UID) GID=$(GID) docker-compose down
+	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose stop
 
 deploy:
 	@echo "Deploying to cluster."

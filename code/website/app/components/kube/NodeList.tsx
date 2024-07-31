@@ -1,17 +1,19 @@
-import Link from 'next/link'
-import { K3sNode } from '../../models/nodes/k3snode'
-import { Formatter } from '../../services/format'
+import Link from 'next/link';
+import { Formatter } from '../../../services/format';
+import { K3sNode } from '../../models/nodes/k3snode';
 
 const getNodesTable = (nodes: K3sNode[]): JSX.Element[] => {
-  const formatter = Formatter()
-  const nodeRows: JSX.Element[] = []
-  if (nodes === null) return []
-  const allNodes = nodes.sort((a, b) => (a.nodeName > b.nodeName ? 1 : -1))
+  const formatter = Formatter();
+  const nodeRows: JSX.Element[] = [];
+  if (nodes === null) return [];
+  const allNodes = nodes.sort((a, b) => (a.nodeName > b.nodeName ? 1 : -1));
   for (const item of allNodes) {
     const row = (
       <tr key={'node-' + item.nodeName}>
         <td>
-          <Link href={'/node/' + item.nodeName}>{item.nodeName}</Link>
+          <Link className="text-primary-link" href={'/node/' + item.nodeName}>
+            {item.nodeName}
+          </Link>
         </td>
         <td>{item.capacity.cpu}</td>
         <td>{formatter.readablizeBytes(item.capacity.memory)}</td>
@@ -24,14 +26,14 @@ const getNodesTable = (nodes: K3sNode[]): JSX.Element[] => {
         <td>{formatter.readableCpuMetric(item.metrics.usage.cpu)}</td>
         <td>{formatter.readableMemoryMetric(item.metrics.usage.memory)}</td>
       </tr>
-    )
-    nodeRows.push(row)
+    );
+    nodeRows.push(row);
   }
-  return nodeRows
-}
+  return nodeRows;
+};
 
 const NodeList = (props: { nodes: K3sNode[] }) => {
-  const nodes = props.nodes
+  const nodes = props.nodes;
 
   return (
     <table className="dashboard mx-auto">
@@ -58,7 +60,7 @@ const NodeList = (props: { nodes: K3sNode[] }) => {
       </thead>
       <tbody>{getNodesTable(nodes)}</tbody>
     </table>
-  )
-}
+  );
+};
 
-export default NodeList
+export default NodeList;

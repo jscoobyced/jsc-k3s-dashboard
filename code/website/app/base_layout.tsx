@@ -1,5 +1,5 @@
-import Menu from './components/Menu'
-import Footer from './components/Footer'
+import Footer from './components/Footer';
+import Menu from './components/Menu';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,7 +10,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Footer />
       </body>
     </html>
-  )
-}
+  );
+};
 
-export default RootLayout
+export default RootLayout;

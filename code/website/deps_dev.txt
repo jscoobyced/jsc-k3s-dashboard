@@ -8,6 +8,8 @@ eslint@8.57.0
 eslint-config-next
 eslint-config-prettier
 postcss
+prettier@4.0.0-alpha.9
+prettier-plugin-organize-imports
 start-server-and-test
 tailwindcss
 typescript

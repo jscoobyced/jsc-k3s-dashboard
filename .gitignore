@@ -25,7 +25,6 @@
 # local env files
 **/.env*.local
 **/.env
-**/.env.dev
 
 # YAML
 **/*-secret.yaml
@@ -46,3 +45,6 @@
 **/cypress/screenshots
 **/cypress/videos
 **/cache
+
+# database
+/data

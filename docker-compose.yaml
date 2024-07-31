@@ -6,7 +6,30 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
-    user: "${UID}:${GID}"
+    user: "${K3UID}:${K3GID}"
+    env_file:
+      - .env
+    volumes:
+      - "${PWD}/code/website:/app"
+    networks:
+      - minikube
+
+  db:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    user: "${K3UID}:${K3GID}"
+    env_file:
+      - .env
+    volumes:
+      - "${PWD}/data/db:/var/lib/mysql"
+      - "${PWD}/etc/sql:/docker-entrypoint-initdb.d"
+    networks:
+      - minikube
+
+  build-web:
+    image: node:lts-slim
+    user: "${K3UID}:${K3GID}"
     env_file:
       - .env
     volumes:

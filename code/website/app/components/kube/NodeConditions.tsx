@@ -1,8 +1,8 @@
-import { K3sNode } from '../../models/nodes/k3snode'
+import { K3sNode } from '../../models/nodes/k3snode';
 
 const getNodesConditionsTable = (node: K3sNode): JSX.Element[] => {
-  const nodeRows: JSX.Element[] = []
-  if (node === null) return []
+  const nodeRows: JSX.Element[] = [];
+  if (node === null || !node.conditions) return [];
   for (const condition of node.conditions) {
     const row = (
       <tr key={'type-' + condition.type}>
@@ -10,18 +10,18 @@ const getNodesConditionsTable = (node: K3sNode): JSX.Element[] => {
         <td>{condition.status}</td>
         <td>{condition.message}</td>
       </tr>
-    )
-    nodeRows.push(row)
+    );
+    nodeRows.push(row);
   }
-  return nodeRows
-}
+  return nodeRows;
+};
 
 const NodeConditions = (props: { node: K3sNode }) => {
-  const node = props.node
+  const node = props.node;
 
   return (
     <table className="dashboard mx-auto">
-      <caption>Nodes Conditions - {node.nodeName}</caption>
+      <caption>Nodes Conditions</caption>
       <thead>
         <tr>
           <th>Type</th>
@@ -31,7 +31,7 @@ const NodeConditions = (props: { node: K3sNode }) => {
       </thead>
       <tbody>{getNodesConditionsTable(node)}</tbody>
     </table>
-  )
-}
+  );
+};
 
-export default NodeConditions
+export default NodeConditions;

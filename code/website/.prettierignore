@@ -1,0 +1,12 @@
+.env
+.env.base
+
+# Ignore the .vscode folder
+**/.vscode
+.next
+coverage
+
+# Ignore .xcf files
+*.xcf
+
+yarn.lock

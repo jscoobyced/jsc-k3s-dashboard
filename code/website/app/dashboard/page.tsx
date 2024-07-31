@@ -1,36 +1,31 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import Article from '../components/Article'
-import { K3sNode } from '../models/nodes/k3snode'
-import { getNodes } from '../services/nodes/NodeService'
-import NodeList from '../components/kube/NodeList'
-import '../../styles/dashboard.css'
+import { useEffect, useState } from 'react';
+import { getNodes } from '../../services/nodes/NodeService';
+import '../../styles/dashboard.css';
+import Article from '../components/Article';
+import NodeList from '../components/kube/NodeList';
+import { K3sNode } from '../models/nodes/k3snode';
 
 const Page = () => {
-  const [nodes, setNodes] = useState([] as K3sNode[])
+  const [nodes, setNodes] = useState([] as K3sNode[]);
+
   const content = (
     <>
       <NodeList nodes={nodes} />
     </>
-  )
+  );
 
   useEffect(() => {
-    const getCurrentNodes = async () => {
-      const nodes = await getNodes()
-      setNodes(nodes)
-    }
-    getCurrentNodes().catch((error) => {
-      console.error(error)
-    })
-  }, [])
+    (async () => {
+      const nodes = await getNodes();
+      setNodes(nodes);
+    })();
+  }, []);
 
   return (
-    <Article
-      content={content}
-      alt={`Information about your cluster.`}
-    ></Article>
-  )
-}
+    <Article content={content} alt={`Information about your cluster`}></Article>
+  );
+};
 
-export default Page
+export default Page;

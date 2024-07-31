@@ -13,7 +13,7 @@ rules:
     resources: ["configmaps"]
     verbs: ["get"]
   - apiGroups: ["metrics.k8s.io"]
-    resources: ["pods", "nodes"]
+    resources: ["pods", "nodes", "namespaces", "services"]
     verbs: ["get", "list", "watch"]
   - apiGroups: ["extensions"]
     resources: ["deployments"]

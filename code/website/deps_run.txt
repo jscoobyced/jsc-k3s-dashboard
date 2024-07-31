@@ -2,3 +2,4 @@ next
 react
 react-dom
 sharp
+mariadb

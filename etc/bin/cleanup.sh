@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ./etc/bin/source.sh
+
 ./etc/bin/undeploy.sh &> /dev/null
 
 kubectl delete secret --namespace jsc-k3s-dashboard jsc-api-token &> /dev/null
@@ -17,3 +19,5 @@ then
 fi
 
 echo "Cluster and configuration removed."
+
+K3UID=${K3UID} K3GID=${K3GID} docker-compose down --volumes
