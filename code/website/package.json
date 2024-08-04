@@ -4,7 +4,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "pretty": "DEBUG=true prettier .",
+    "pretty": "prettier --write .",
     "lint": "next lint"
   },
   "dependencies": {
@@ -25,7 +25,7 @@
     "eslint-config-next": "^14.2.5",
     "eslint-config-prettier": "^9.1.0",
     "postcss": "^8.4.40",
-    "prettier": "^4.0.0-alpha.9",
+    "prettier": "4.0.0-alpha.9",
     "prettier-plugin-organize-imports": "^4.0.0",
     "start-server-and-test": "^2.0.5",
     "tailwindcss": "^3.4.7",
