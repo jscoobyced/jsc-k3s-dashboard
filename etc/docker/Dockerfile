@@ -15,6 +15,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY app app
 COPY styles styles
 COPY public public
+COPY services services
+COPY repositories repositories
 COPY *.json *.js *.ts ./
 RUN yarn build
 
