@@ -1,4 +1,4 @@
-import { K3sPod } from '../../models/pods/k3spod';
+import { K3sPod } from '../../app/models/pods/k3spod';
 import { HttpOptions, PODS_URL, ServerUrl } from '../api';
 import { K3sPodResponse } from './K3sPodResponse';
 

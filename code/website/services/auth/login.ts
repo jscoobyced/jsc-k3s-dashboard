@@ -1,12 +1,12 @@
 'use server';
 
-import { User } from '../../models/auth/user';
+import { User } from '../../app/models/auth/user';
 import { retrieveData, storeData } from '../data/data';
 import { decrypt, encrypt } from './crypto';
 import {
   createSession,
   deleteCurrentSession,
-  getCurrentSessionId,
+  getCurrentSession,
 } from './session';
 
 const userPath = `users`;
@@ -42,7 +42,7 @@ export const logout = async () => {
 };
 
 export const isLoggedIn = () => {
-  const sessionId = getCurrentSessionId();
+  const sessionId = getCurrentSession();
 };
 
 const getUsers = () => {

@@ -1,6 +1,6 @@
 'use server';
 import * as fs from 'fs';
-import { Entity } from '../../models/auth/user';
+import { Entity } from '../../app/models/auth/user';
 
 const dataPath = process.env.DATA_PATH || './';
 

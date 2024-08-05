@@ -1,10 +1,10 @@
 'use server';
 
+import { Session } from '../../app/models/auth/user';
 import {
   Connection,
   getConnection,
-} from '../../../repositories/database/connection';
-import { Session } from '../../models/auth/user';
+} from '../../repositories/database/connection';
 
 export const getSessionById = async (currentSessionId: string) => {
   const emptySession: Session = {

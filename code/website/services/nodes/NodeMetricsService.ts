@@ -1,4 +1,4 @@
-import { K3sNodeMetric } from '../../models/nodes/k3snode';
+import { K3sNodeMetric } from '../../app/models/nodes/k3snode';
 import { HttpOptions, NODE_METRICS_URL, ServerUrl } from '../api';
 import { NodeMetricsResponse } from './K3sNodesResponse';
 

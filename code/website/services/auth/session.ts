@@ -2,7 +2,7 @@
 
 import { randomUUID } from 'crypto';
 import { cookies } from 'next/headers';
-import { Session } from '../../models/auth/user';
+import { Session } from '../../app/models/auth/user';
 import { getSessionById } from '../data/session';
 
 const SESSION_KEY = 'sessionId';

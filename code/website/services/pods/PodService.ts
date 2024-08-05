@@ -1,6 +1,6 @@
 'use server';
 
-import { K3sPod } from '../../models/pods/k3spod';
+import { K3sPod } from '../../app/models/pods/k3spod';
 import { getPodsData } from './PodDataService';
 
 export const getPods = async (nodeName: string): Promise<K3sPod[]> => {

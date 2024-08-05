@@ -3,7 +3,7 @@ import {
   K3sNode,
   K3sNodeMetric,
   NodeCondition,
-} from '../../models/nodes/k3snode';
+} from '../../app/models/nodes/k3snode';
 import { HttpOptions, NODES_URL, ServerUrl } from '../api';
 import { Formatter } from '../format';
 import { K3sNodesResponse } from './K3sNodesResponse';
