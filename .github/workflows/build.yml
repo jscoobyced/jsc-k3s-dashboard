@@ -8,14 +8,14 @@ on:
     types: [published]
 
 env:
-  IMAGE_NAME: jsc-k3s-dashboard
+  IMAGE_NAME_CLIENT: jsc-k3s-dashboard-client
+  IMAGE_NAME_SERVER: jsc-k3s-dashboard-server
   IMAGE_TITLE: JSC k3s Dashboard
   IMAGE_DESCRIPTION: This is the image for JSC k3s Dashboard.
 
 jobs:
-
-  build:
-    name: Build image
+  build-client:
+    name: Build clientside image
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
 
@@ -30,7 +30,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME_CLIENT }}
           tags: |
             type=semver,pattern={{version}}
           labels: |
@@ -50,8 +50,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: code/website
-          file: etc/docker/Dockerfile
+          context: src/clientside
+          file: etc/docker/Dockerfile.client
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
