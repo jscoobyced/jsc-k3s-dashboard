@@ -1,0 +1,14 @@
+{
+  "name": "jsc-k3s-dashboard",
+  "description": "A poor's man K3s Dashboard",
+  "author": {
+    "name": "Cédric Rochefolle"
+  },
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "lint": "eslint .",
+    "build": "tsc"
+  }
+}

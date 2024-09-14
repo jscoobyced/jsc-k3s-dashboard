@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-position: 50% 100px;
+  padding: 0;
+  margin: 0;
+}
+
+body:before {
+  content: ' ';
+}
+
+a {
+  @apply px-1 inline text-primary-link;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ol,
+ul,
+ol > li,
+ul > li {
+  padding: revert;
+  margin: unset;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+.circle-shape {
+  shape-outside: border-box;
+  margin: 1rem;
+  padding: 0px 10px;
+}

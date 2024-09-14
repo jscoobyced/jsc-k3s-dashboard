@@ -1,6 +1,6 @@
-version: '3.1'
+version: "3.1"
 services:
-  web:
+  api:
     build:
       context: ./etc/docker
       dockerfile: Dockerfile.dev
@@ -11,6 +11,15 @@ services:
       - .env
     volumes:
       - "${PWD}/code/website:/app"
+    networks:
+      - minikube
+  web:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    user: "${K3UID}:${K3GID}"
+    volumes:
+      - "${PWD}/src/clientside/dist:/usr/share/nginx/html"
     networks:
       - minikube
 
@@ -33,7 +42,7 @@ services:
     env_file:
       - .env
     volumes:
-      - "${PWD}/code/website:/app"
+      - "${PWD}/src/${BUILD_SRC}:/app"
     networks:
       - minikube
 

@@ -1,0 +1,17 @@
+{
+  "name": "jsc-k3s-dashboard",
+  "description": "A poor's man K3s Dashboard",
+  "author": {
+    "name": "Cédric Rochefolle"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "test": "vitest",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "pretty": "prettier --write ."
+  }
+}

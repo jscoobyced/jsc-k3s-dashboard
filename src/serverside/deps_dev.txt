@@ -1,0 +1,12 @@
+@eslint/js
+@types/node
+@types/express
+eslint
+globals
+postcss
+prettier
+prettier-plugin-organize-imports
+tailwindcss
+ts-node
+typescript
+typescript-eslint
