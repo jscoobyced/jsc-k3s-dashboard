@@ -14,7 +14,7 @@ setup:
 reset: clean setup
 
 dev:
-	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose up web -d
+	@yarn --cwd src/clientside dev
 
 stop:
 	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose stop
