@@ -31,7 +31,7 @@ undeploy:
 	@./etc/bin/undeploy.sh
 
 build:
-	@./etc/bin/build.sh
+	@./etc/bin/build.sh clientside
 
 build-push:
-	@./etc/bin/build.sh Y
+	@./etc/bin/build.sh clientside Y

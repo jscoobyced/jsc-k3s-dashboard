@@ -16,8 +16,6 @@ node_modules
 coverage
 .next
 next-env.d.ts
-yarn.lock
-package.json
 
 # testing
 **/.env
