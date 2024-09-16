@@ -1,2 +1,4 @@
+cors
+dotenv
 express
 mariadb

@@ -1,4 +1,5 @@
 @eslint/js
+@types/cors
 @types/node
 @types/express
 eslint
