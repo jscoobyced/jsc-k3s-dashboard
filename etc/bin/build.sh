@@ -9,7 +9,7 @@ DOCKER_PUSH=
 SIDE=client
 
 # Client-side or server-side
-if [ "${1}" == "server" ];
+if [ "${1}" == "serverside" ];
 then
     SIDE=server
 fi

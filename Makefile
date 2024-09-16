@@ -16,6 +16,9 @@ reset: clean setup
 dev:
 	@yarn --cwd src/clientside dev
 
+start:
+	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose up web api
+
 stop:
 	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose stop
 
@@ -31,7 +34,8 @@ undeploy:
 	@./etc/bin/undeploy.sh
 
 build:
-	@./etc/bin/build.sh clientside
+	@./etc/bin/build.sh serverside
 
 build-push:
 	@./etc/bin/build.sh clientside Y
+	@./etc/bin/build.sh serverside Y
