@@ -6,14 +6,12 @@ import { homeRoute } from './routes/home';
 
 // Get environent variables
 dotenv.config();
-const domain = process.env.DOMAIN ?? 'localhost';
-const port = process.env.PORT ?? '5173';
-const scheme = process.env.SCHEME ?? 'http';
+const domain = process.env.DOMAIN ?? 'http://localhost:3000';
 
 // Create Express app
 export const app = express();
 var corsOptions = {
-  origin: `${scheme}://${domain}:${port}`,
+  origin: `${domain}`,
 };
 app.use(cors(corsOptions));
 
