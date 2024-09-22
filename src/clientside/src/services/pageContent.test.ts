@@ -12,6 +12,7 @@ const expectedData = {
   name: 'test',
 };
 
+console.log(`${pageRoutes}/${homeRoute}`);
 const server = setupServer(
   http.get(`${pageRoutes}/${homeRoute}`, () => {
     return HttpResponse.json(expectedData);
