@@ -1,0 +1,5 @@
+cors
+dotenv
+express
+mariadb
+file:../common

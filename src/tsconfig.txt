@@ -1,0 +1,14 @@
+{
+    "files": [],
+    "compilerOptions": {
+        "disableSourceOfProjectReferenceRedirect": true
+    },
+    "references": [
+        {
+            "path": "./server"
+        },
+        {
+            "path": "./common"
+        },
+    ]
+}

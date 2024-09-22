@@ -1,0 +1,15 @@
+{
+  "name": "jsc-k3s-dashboard-common",
+  "description": "Common stuff for the K3s Dashboard",
+  "author": {
+    "name": "Cédric Rochefolle"
+  },
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest",
+    "build": "tsc"
+  }
+}

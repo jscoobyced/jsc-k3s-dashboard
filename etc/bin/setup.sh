@@ -3,8 +3,9 @@
 . ./etc/bin/source.sh
 
 
-CLIENTSIDE="clientside"
-SERVERSIDE="serverside"
+CLIENTSIDE="client"
+SERVERSIDE="server"
+COMMON="common"
 
 build_web() {
     echo "  🛠️   Building $1"
@@ -25,6 +26,7 @@ rm -Rf ./data
 mkdir -p data/db
 
 
+build_web $COMMON
 build_web $CLIENTSIDE
 build_web $SERVERSIDE
 

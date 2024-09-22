@@ -14,7 +14,7 @@ setup:
 reset: clean setup
 
 dev:
-	@yarn --cwd src/clientside dev
+	@yarn --cwd src/client dev
 
 start:
 	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose up web api
@@ -34,8 +34,8 @@ undeploy:
 	@./etc/bin/undeploy.sh
 
 build:
-	@./etc/bin/build.sh serverside
+	@./etc/bin/build.sh server
 
 build-push:
-	@./etc/bin/build.sh clientside Y
-	@./etc/bin/build.sh serverside Y
+	@./etc/bin/build.sh client Y
+	@./etc/bin/build.sh server Y

@@ -37,7 +37,7 @@ make dev
 ```
 
 You can then browse to http://0.0.0.0:5173
-The client-side application was created using the `create vite clientside --template react-ts`.
+The client-side application was created using the `create vite client --template react-ts`.
 
 You type `q` then press ENTER to stop the application.
 

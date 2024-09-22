@@ -1,0 +1,11 @@
+@eslint/js
+@jest/globals
+eslint
+globals
+jest
+prettier
+prettier-plugin-organize-imports
+ts-jest
+ts-node
+typescript
+typescript-eslint

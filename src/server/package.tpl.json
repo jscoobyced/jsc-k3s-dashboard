@@ -1,0 +1,21 @@
+{
+  "name": "jsc-k3s-dashboard",
+  "description": "A poor's man K3s Dashboard",
+  "author": {
+    "name": "Cédric Rochefolle"
+  },
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "lint": "eslint .",
+    "build": "tsc"
+  },
+  "nodemonConfig": {
+    "watch": ["src", "../common/src"],
+    "ext": "ts",
+    "events": {
+      "restart": "yarn --cwd ../common build && yarn install --force"
+    }
+  }
+}

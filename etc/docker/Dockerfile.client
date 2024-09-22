@@ -1,9 +1,11 @@
 FROM node:22-alpine AS builder
 
 WORKDIR /app
-COPY src/clientside/ ./
-RUN yarn install
-RUN yarn build
+COPY src/client/ ./client/
+COPY src/common ./common/
+
+RUN cd common ; yarn install ; yarn build
+RUN cd client ; yarn install ; yarn build
 
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html

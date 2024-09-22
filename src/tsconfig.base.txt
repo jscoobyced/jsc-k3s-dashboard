@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "declaration": false,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "importHelpers": true,
+        "isolatedModules": true,
+        "lib": ["ES2023"],
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "noEmitHelpers": true,
+        "pretty": true,
+        "resolveJsonModule": true,
+        "rootDir": ".",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "es2023",
+        "paths": {
+            "@org/shared": ["common/index.ts"]
+        },
+    },
+    "exclude": ["node_modules"],
+  }
+  

@@ -5,11 +5,11 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - ${PWD}/src/serverside/.env
+      - ${PWD}/src/server/.env
     command: "node /app/index.js"
     volumes:
-      - "${PWD}/src/serverside/dist:/app/"
-      - "${PWD}/src/serverside/node_modules:/app/node_modules"
+      - "${PWD}/src/server/dist:/app/"
+      - "${PWD}/src/server/node_modules:/app/node_modules"
     networks:
       - minikube
   web:
@@ -17,7 +17,7 @@ services:
     ports:
       - "3001:80"
     volumes:
-      - "${PWD}/src/clientside/dist:/usr/share/nginx/html"
+      - "${PWD}/src/client/dist:/usr/share/nginx/html"
     networks:
       - minikube
 
@@ -40,7 +40,7 @@ services:
     env_file:
       - .env
     volumes:
-      - "${PWD}/src/${BUILD_SRC}:/app"
+      - "${PWD}/src/:/app/src/"
     networks:
       - minikube
 
