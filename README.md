@@ -1,5 +1,7 @@
 # JSC Poor man's Kubernetes Dashboard
 
+[![codecov](https://codecov.io/github/jscoobyced/jsc-k3s-dashboard/graph/badge.svg?token=3A4TW6KLJY)](https://codecov.io/github/jscoobyced/jsc-k3s-dashboard)
+
 Initially tested on [Rancher's k3s](https://rancher.com/products/k3s), which includes by default the metrics services. It should work on any kubernetes implementation, but you might have to add the metrics services if they are not already there (for minikube, run `minikube addons enable metrics-server`)
 
 ---
