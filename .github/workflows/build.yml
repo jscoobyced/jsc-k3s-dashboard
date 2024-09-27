@@ -36,7 +36,7 @@ jobs:
         with:
           name: source-code-common
           retention-days: 1
-          path: src/common
+          path: src/common/node_modules
 
   build:
     name: Build client and server source code
@@ -55,7 +55,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: source-code-common
-          path: src/common
+          path: src/common/node_modules
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -94,7 +94,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: source-code-common
-          path: src/common
+          path: src/common/node_modules
 
       - name: Download ${{ matrix.service }} artifact
         uses: actions/download-artifact@v4
@@ -103,7 +103,10 @@ jobs:
           path: src/${{ matrix.service }}/node_modules
 
       - name: Run ESLint
-        run: yarn --cwd src/${{ matrix.service }} lint
+        run: |
+          ls -l src/${{ matrix.service }}
+          ls -l src/${{ matrix.service }}/node_modules
+          yarn --cwd src/${{ matrix.service }} lint
 
   test:
     name: Run Tests with Coverage
@@ -127,7 +130,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: source-code-common
-          path: src/common
+          path: src/common/node_modules
 
       - name: Download ${{ matrix.service }} artifact
         uses: actions/download-artifact@v4
@@ -166,7 +169,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # If needed, add token in your repository secrets
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./src/${{ matrix.service }}/coverage/*.json
           flags: unittests
           name: code-coverage-${{ matrix.service }}
