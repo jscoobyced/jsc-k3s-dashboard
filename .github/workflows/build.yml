@@ -65,12 +65,7 @@ jobs:
           path: src/common/
 
       - name: Install Dependencies
-        run: |
-          ls -l src/common/dist
-          ls -l src/common/node_modules
-          ls -l src/${{ matrix.service }}
-          ls -l src/${{ matrix.service }}/node_modules
-          yarn --cwd src/${{ matrix.service }} install
+        run: yarn --cwd src/${{ matrix.service }} install
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
