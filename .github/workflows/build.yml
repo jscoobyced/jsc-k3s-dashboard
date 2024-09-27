@@ -31,15 +31,16 @@ jobs:
           yarn --cwd src/common install
           yarn --cwd src/common build
 
+      - name: Create tarball
+        run: tar -czf common.tar.gz -C src/common dist node_modules
+
       - name: Upload common artifacts
         uses: actions/upload-artifact@v4
         with:
           name: source-code-common
           include-hidden-files: true
           retention-days: 1
-          path: |
-            src/common/dist
-            src/common/node_modules
+          path: common.tar.gz
 
   build:
     name: Build source code
@@ -63,10 +64,15 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: source-code-common
-          path: src/common/
+
+      - name: Untar common Dependencies
+        run: tar -xzf common.tar.gz -C src/common
 
       - name: Install Dependencies
         run: yarn --cwd src/${{ matrix.service }} install
+
+      - name: Create tarball
+        run: tar -czf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }} node_modules
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -74,7 +80,7 @@ jobs:
           name: source-code-${{ matrix.service }}
           retention-days: 1
           include-hidden-files: true
-          path: src/${{ matrix.service }}/node_modules
+          path: ${{ matrix.service }}.tar.gz
 
   lint:
     name: Run ESlint on source code
@@ -94,17 +100,21 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Download common artifact
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: source-code-common
-          path: src/common/
+
+      - name: Untar common Dependencies
+        run: tar -xzf common.tar.gz -C src/common
 
       - name: Download ${{ matrix.service }} artifact
         uses: actions/download-artifact@v4
         with:
           name: source-code-${{ matrix.service }}
-          path: src/${{ matrix.service }}/node_modules
+
+      - name: Untar ${{ matrix.service }} Dependencies
+        run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}
 
       - name: Run ESLint
         run: |
@@ -138,11 +148,21 @@ jobs:
           name: source-code-common
           path: src/common
 
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: source-code-common
+
+      - name: Untar common Dependencies
+        run: tar -xzf common.tar.gz -C src/common
+
       - name: Download ${{ matrix.service }} artifact
         uses: actions/download-artifact@v4
         with:
           name: source-code-${{ matrix.service }}
-          path: src/${{ matrix.service }}/node_modules
+
+      - name: Untar ${{ matrix.service }} Dependencies
+        run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}
 
       - name: Run Tests
         run: yarn --cwd src/${{ matrix.service }} test --coverage
