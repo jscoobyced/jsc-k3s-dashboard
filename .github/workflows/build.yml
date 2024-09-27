@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -49,10 +49,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
       - name: Download artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v4
         with:
           name: source-code-common
           path: src/common
@@ -83,7 +83,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -91,13 +91,13 @@ jobs:
           node-version: "22"
 
       - name: Download common artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v4
         with:
           name: source-code-common
           path: src/common
 
       - name: Download ${{ matrix.service }} artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v4
         with:
           name: source-code-${{ matrix.service }}
           path: src/${{ matrix.service }}/node_modules
@@ -116,7 +116,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -124,13 +124,13 @@ jobs:
           node-version: "22"
 
       - name: Download common artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v4
         with:
           name: source-code-common
           path: src/common
 
       - name: Download ${{ matrix.service }} artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v4
         with:
           name: source-code-${{ matrix.service }}
           path: src/${{ matrix.service }}/node_modules
@@ -156,10 +156,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
       - name: Download artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v4
         with:
           name: coverage-report-${{ matrix.service }}
 
@@ -186,7 +186,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
