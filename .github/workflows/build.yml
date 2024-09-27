@@ -118,8 +118,6 @@ jobs:
 
       - name: Run ESLint
         run: |
-          ls -al src/${{ matrix.service }}/node_modules
-          ls -al src/${{ matrix.service }}/node_modules/.bin || true
           yarn --cwd src/${{ matrix.service }} lint
 
   test:
@@ -162,10 +160,15 @@ jobs:
           name: source-code-${{ matrix.service }}
 
       - name: Untar ${{ matrix.service }} Dependencies
-        run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}
+        run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}/
 
       - name: Run Tests
-        run: yarn --cwd src/${{ matrix.service }} test --coverage
+        run: |
+          pwd
+          ls -al .
+          ls -al src/${{ matrix.service }}
+          ls -al src/${{ matrix.service }}/node_modules
+          yarn --cwd src/${{ matrix.service }} test --coverage
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
