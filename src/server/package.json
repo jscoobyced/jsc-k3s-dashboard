@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "lint": "eslint .",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "nodemonConfig": {
     "watch": [

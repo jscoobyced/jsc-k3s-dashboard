@@ -164,10 +164,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          pwd
-          ls -al .
-          ls -al src/${{ matrix.service }}
-          ls -al src/${{ matrix.service }}/node_modules
+          ls -al src/${{ matrix.service }}/node_modules/vitest || true
           yarn --cwd src/${{ matrix.service }} test --coverage
 
       - name: Upload Coverage Report
