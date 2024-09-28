@@ -8,18 +8,29 @@ SERVERSIDE="server"
 COMMON="common"
 
 build_web() {
-    echo "  🛠️   Building $1"
+    echo "    🛠️   Building $1"
     # Reset package.json
     cp src/$1/package.tpl.json src/$1/package.json
-    # Delete older node_modules and yarn.lock
-    rm -Rf ./src/$1/node_modules ./src/$1/yarn.lock
+    # Delete older node_modules, yarn.lock, dist and coverage
+    rm -Rf ./src/$1/node_modules ./src/$1/yarn.lock ./src/$1/dist ./src/$1/coverage
     # Format dependencies to a single line
     DEV_FILES=$(cat src/$1/deps_dev.txt | tr '\n' ' ')
     RUN_FILES=$(cat src/$1/deps_run.txt | tr '\n' ' ')
     # Install dependencies
-    BUILD_SRC=$1 docker-compose run --rm build-web yarn --cwd /app/src/$1 add $RUN_FILES > /dev/null
+    if [ "$RUN_FILES" != "" ]; then
+        echo "    📦   Installing dependencies"
+        BUILD_SRC=$1 docker-compose run --rm build-web yarn --cwd /app/src/$1 add $RUN_FILES > /dev/null
+    fi
     # Install dev dependencies
-    BUILD_SRC=$1 docker-compose run --rm build-web yarn --cwd /app/src/$1 add -D $DEV_FILES > /dev/null
+    if [ "$DEV_FILES" != "" ]; then
+        echo "    📦   Installing dev dependencies"
+        BUILD_SRC=$1 docker-compose run --rm build-web yarn --cwd /app/src/$1 add -D $DEV_FILES > /dev/null
+    fi
+    # Build common package if it is the common package
+    if [ "$1" == "$COMMON" ]; then
+        BUILD_SRC=$1 docker-compose run --rm build-web yarn --cwd /app/src/$1 build > /dev/null
+        cp src/$1/package.json src/$1/dist/package.json
+    fi
 }
 
 rm -Rf ./data

@@ -2,4 +2,4 @@ cors
 dotenv
 express
 mariadb
-file:../common
+file:../common/dist

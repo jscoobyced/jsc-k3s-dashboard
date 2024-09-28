@@ -3,7 +3,7 @@ import {
   defaultCommonPageData,
   defaultHomePageData,
   HomePageData,
-} from '../models/pages/home';
+} from 'jsc-k3s-dashboard-common/src/models/pages/home';
 import { commonRoute, homeRoute, pageRoutes } from './routing/apiRoutes';
 
 export const getCommonPageData = async (): Promise<CommonPageData> => {

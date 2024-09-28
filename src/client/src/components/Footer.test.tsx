@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import { defaultCommonPageData } from 'jsc-k3s-dashboard-common/src/models/pages/home';
 import { MemoryRouter } from 'react-router-dom';
-import { defaultCommonPageData } from '../models/pages/home';
 import Footer from './Footer';
 
 describe('Footer', () => {

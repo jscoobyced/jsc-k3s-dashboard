@@ -1,11 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
-import App from './App';
 import {
   defaultCommonPageData,
   defaultHomePageData,
-} from './models/pages/home';
+} from 'jsc-k3s-dashboard-common/src/models/pages/home';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
+import App from './App';
 import {
   commonRoute,
   homeRoute,

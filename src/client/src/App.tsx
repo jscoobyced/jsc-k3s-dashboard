@@ -1,3 +1,4 @@
+import { CommonPageData } from 'jsc-k3s-dashboard-common/src/models/pages/home';
 import { useEffect, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { ApplicationContext } from './context';
@@ -5,7 +6,6 @@ import {
   ApplicationContextData,
   defaultApplicationContext,
 } from './models/applicationContext';
-import { CommonPageData } from './models/pages/home';
 import { getCommonPageData } from './services/pageContent';
 import { AppRouter } from './services/routing/routes';
 

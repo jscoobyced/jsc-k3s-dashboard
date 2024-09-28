@@ -9,6 +9,8 @@ app.use(commonRoute);
 
 describe('commonRoute', () => {
   it('should send the defaultCommonPageData when calling /api/pages/common', async () => {
+    // Not sure why this is needed, but it is
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     const response = await request(app).get('/api/pages/common');
 
     expect(response.status).toBe(200);

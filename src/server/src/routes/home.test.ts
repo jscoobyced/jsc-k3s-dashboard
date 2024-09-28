@@ -9,6 +9,8 @@ app.use(homeRoute);
 
 describe('homeRoute', () => {
   it('should send the defaultHomePageData when calling /api/pages/home', async () => {
+    // Not sure why this is needed, but it is
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     const response = await request(app).get('/api/pages/home');
 
     expect(response.status).toBe(200);

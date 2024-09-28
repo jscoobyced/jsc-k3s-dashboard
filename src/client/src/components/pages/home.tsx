@@ -1,5 +1,8 @@
+import {
+  defaultHomePageData,
+  HomePageData,
+} from 'jsc-k3s-dashboard-common/src/models/pages/home';
 import { useEffect, useState } from 'react';
-import { defaultHomePageData, HomePageData } from '../../models/pages/home';
 import { getHomePageData } from '../../services/pageContent';
 import Article from '../Article';
 

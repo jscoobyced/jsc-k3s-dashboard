@@ -1,9 +1,9 @@
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
 import {
   defaultCommonPageData,
   defaultHomePageData,
-} from '../models/pages/home';
+} from 'jsc-k3s-dashboard-common/src/models/pages/home';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 import { getCommonPageData, getHomePageData } from './pageContent';
 import { commonRoute, homeRoute, pageRoutes } from './routing/apiRoutes';
 
