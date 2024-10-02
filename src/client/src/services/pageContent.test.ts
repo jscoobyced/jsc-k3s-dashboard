@@ -2,17 +2,27 @@ import {
   defaultCommonPageData,
   defaultHomePageData,
 } from 'jsc-k3s-dashboard-common/src/models/home/defaults';
+import { defaultK3sNode } from 'jsc-k3s-dashboard-common/src/models/kube/defaults';
+import { K3sNode } from 'jsc-k3s-dashboard-common/src/models/kube/k3snode';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
-import { getCommonPageData, getHomePageData } from './pageContent';
-import { commonRoute, homeRoute, pageRoutes } from './routing/apiRoutes';
+import {
+  getCommonPageData,
+  getHomePageData,
+  getNodesData,
+} from './pageContent';
+import {
+  commonRoute,
+  homeRoute,
+  nodesRoute,
+  pageRoutes,
+} from './routing/apiRoutes';
 
 const expectedData = {
   id: 1,
   name: 'test',
 };
 
-console.log(`${pageRoutes}/${homeRoute}`);
 const server = setupServer(
   http.get(`${pageRoutes}/${homeRoute}`, () => {
     return HttpResponse.json(expectedData);
@@ -56,5 +66,19 @@ describe('pageContent', () => {
     );
     const data = await getCommonPageData();
     expect(data).toEqual(defaultCommonPageData);
+  });
+
+  it('fetches default nodes data when error', async () => {
+    server.use(
+      http.get(`${pageRoutes}/${nodesRoute}`, () => {
+        return HttpResponse.json({}, { status: 500 });
+      }),
+    );
+    const data = await getNodesData();
+    const defaultNode: K3sNode = {
+      ...defaultK3sNode,
+      nodeName: 'Default Node',
+    };
+    expect(data).toEqual([defaultNode]);
   });
 });

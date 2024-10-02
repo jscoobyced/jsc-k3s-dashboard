@@ -7,3 +7,4 @@ export const pageRoutes = `${apiDomain()}api/pages`;
 export const commonRoute = 'common';
 export const homeRoute = 'home';
 export const dashboardRoute = 'dashboard';
+export const nodesRoute = 'nodes';

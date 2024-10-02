@@ -1,6 +1,6 @@
 import { K3sNode } from 'jsc-k3s-dashboard-common/src/models/kube/k3snode';
 import { useEffect, useState } from 'react';
-import { getNodesData } from '../../../services/kube/NodeService';
+import { getNodesData } from '../../../services/pageContent';
 import '../../../styles/dashboard.css';
 import NodeList from '../../kube/NodeList';
 import Page from '../../Page';
