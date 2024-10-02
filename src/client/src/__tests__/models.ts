@@ -1,4 +1,4 @@
-import { K3sNode } from '../models/nodes/k3snode';
+import { K3sNode } from 'jsc-k3s-dashboard-common/src/models/kube/k3snode';
 import { K3sPod } from '../models/pods/k3spod';
 
 export const mockNode: K3sNode = {

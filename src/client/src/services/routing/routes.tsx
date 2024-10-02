@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import Menu from '../../components/Menu';
 import Home from '../../components/pages/home';
 import Information from '../../components/pages/info';
+import Dashboard from '../../components/pages/kube/dashboard';
 import PrivacyPolicy from '../../components/pages/privacy';
 import TermOfUse from '../../components/pages/tos';
 
@@ -26,7 +27,7 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <Home />,
+        element: <Dashboard />,
       },
       {
         path: '/info',

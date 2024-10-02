@@ -1,4 +1,4 @@
-import { defaultCommonPageData } from 'jsc-k3s-dashboard-common/src/models/pages/home';
+import { defaultCommonPageData } from 'jsc-k3s-dashboard-common/src/models/home/defaults';
 
 export interface ApplicationContextData {
   version: string;

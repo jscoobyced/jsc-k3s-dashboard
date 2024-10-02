@@ -14,6 +14,7 @@ export default {
           bg: 'rgb(10, 10, 10)',
           color: 'rgb(130, 140, 160)',
           link: 'rgb(77, 195, 255)',
+          error: 'rgb(255, 77, 77)',
         },
         secondary: {
           bg: 'rgb(32, 32, 32)',

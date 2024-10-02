@@ -1,5 +1,5 @@
+import { K3sNode } from 'jsc-k3s-dashboard-common/src/models/kube/k3snode';
 import React from 'react';
-import { K3sNode } from '../../models/nodes/k3snode';
 import {
   readableCpuMetric,
   readableMemoryMetric,

@@ -1,9 +1,11 @@
 import {
-  CommonPageData,
   defaultCommonPageData,
   defaultHomePageData,
+} from 'jsc-k3s-dashboard-common/src/models/home/defaults';
+import {
+  CommonPageData,
   HomePageData,
-} from 'jsc-k3s-dashboard-common/src/models/pages/home';
+} from 'jsc-k3s-dashboard-common/src/models/home/home';
 import { commonRoute, homeRoute, pageRoutes } from './routing/apiRoutes';
 
 export const getCommonPageData = async (): Promise<CommonPageData> => {

@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import {
   defaultCommonPageData,
   defaultHomePageData,
-} from 'jsc-k3s-dashboard-common/src/models/pages/home';
+} from 'jsc-k3s-dashboard-common/src/models/home/defaults';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import App from './App';
