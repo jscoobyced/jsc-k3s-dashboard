@@ -72,7 +72,8 @@ jobs:
 
       - name: Debug folder
         run: |
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/ || true
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src || true
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/ || true
           ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
 
       - name: Create tarball
@@ -119,11 +120,6 @@ jobs:
       - name: Untar ${{ matrix.service }} Dependencies
         run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}/
 
-      - name: Debug folder
-        run: |
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/ || true
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
-
       - name: Run ESLint
         run: |
           yarn --cwd src/${{ matrix.service }} lint
@@ -166,9 +162,8 @@ jobs:
 
       - name: Debug folder
         run: |
-          ls -al src/common/
-          ls -al src/common/src
-          ls -al src/common/dist
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src || true
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/ || true
           ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
 
       - name: Run Tests
