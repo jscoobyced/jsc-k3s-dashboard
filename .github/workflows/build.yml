@@ -72,9 +72,7 @@ jobs:
 
       - name: Debug folder
         run: |
-          ls -al src/common/
-          ls -al src/common/src
-          ls -al src/common/dist
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/ || true
           ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
 
       - name: Create tarball
@@ -123,9 +121,7 @@ jobs:
 
       - name: Debug folder
         run: |
-          ls -al src/common/
-          ls -al src/common/src
-          ls -al src/common/dist
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/ || true
           ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
 
       - name: Run ESLint
