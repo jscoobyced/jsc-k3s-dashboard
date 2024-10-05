@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import express from 'express';
-import { defaultHomePageData } from 'jsc-k3s-dashboard-common/src/models/pages/home';
+import { defaultHomePageData } from 'jsc-k3s-dashboard-common/src/models/home/defaults';
 import request from 'supertest';
 import { homeRoute } from './home';
 
