@@ -38,7 +38,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: source-code-common
-          include-hidden-files: true
           retention-days: 1
           path: common.tar.gz
 
@@ -66,10 +65,17 @@ jobs:
           name: source-code-common
 
       - name: Untar common Dependencies
-        run: tar -xzf common.tar.gz -C src/common
+        run: tar -xzf common.tar.gz -C src/common/
 
       - name: Install Dependencies
         run: yarn --cwd src/${{ matrix.service }} install
+
+      - name: Debug folder
+        run: |
+          ls -al src/common/
+          ls -al src/common/src
+          ls -al src/common/dist
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
 
       - name: Create tarball
         run: tar -czf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }} node_modules
@@ -79,7 +85,6 @@ jobs:
         with:
           name: source-code-${{ matrix.service }}
           retention-days: 1
-          include-hidden-files: true
           path: ${{ matrix.service }}.tar.gz
 
   lint:
@@ -114,7 +119,14 @@ jobs:
           name: source-code-${{ matrix.service }}
 
       - name: Untar ${{ matrix.service }} Dependencies
-        run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}
+        run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}/
+
+      - name: Debug folder
+        run: |
+          ls -al src/common/
+          ls -al src/common/src
+          ls -al src/common/dist
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
 
       - name: Run ESLint
         run: |
@@ -140,12 +152,6 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Download common artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: source-code-common
-          path: src/common
-
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
@@ -162,10 +168,15 @@ jobs:
       - name: Untar ${{ matrix.service }} Dependencies
         run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}/
 
-      - name: Run Tests
+      - name: Debug folder
         run: |
-          ls -al src/${{ matrix.service }}/node_modules/vitest || true
-          yarn --cwd src/${{ matrix.service }} test --coverage
+          ls -al src/common/
+          ls -al src/common/src
+          ls -al src/common/dist
+          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
+
+      - name: Run Tests
+        run: yarn --cwd src/${{ matrix.service }} test --coverage
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
@@ -195,7 +206,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # If needed, add token in your repository secrets
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./src/${{ matrix.service }}/coverage/*.json
           flags: unittests
           name: code-coverage-${{ matrix.service }}
