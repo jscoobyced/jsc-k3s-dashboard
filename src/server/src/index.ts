@@ -9,9 +9,9 @@ import { nodeRoute } from './routes/nodes';
 // Get environent variables
 dotenv.config();
 const domain = getFromProcess('DOMAIN', 'localhost');
-const port = getFromProcess('PORT', '3001');
+const port = getFromProcess('PORT', '');
 const scheme = getFromProcess('SCHEME', 'http');
-const serverUrl = `${scheme}://${domain}:${port}`;
+const serverUrl = `${scheme}://${domain}${port}`;
 
 // Create Express app
 export const app = express();
