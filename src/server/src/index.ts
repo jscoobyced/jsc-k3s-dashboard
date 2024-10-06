@@ -1,20 +1,22 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
+import { getFromProcess } from 'jsc-k3s-dashboard-common/src/services/process';
 import { commonRoute } from './routes/common';
 import { homeRoute } from './routes/home';
 import { nodeRoute } from './routes/nodes';
 
 // Get environent variables
 dotenv.config();
-const domain = process.env.DOMAIN
-  ? `https://${process.env.DOMAIN}`
-  : 'http://localhost:3000';
+const domain = getFromProcess('DOMAIN', 'localhost');
+const port = getFromProcess('PORT', '3001');
+const scheme = getFromProcess('SCHEME', 'http');
+const serverUrl = `${scheme}://${domain}:${port}`;
 
 // Create Express app
 export const app = express();
 var corsOptions = {
-  origin: domain,
+  origin: serverUrl,
 };
 app.use(cors(corsOptions));
 
