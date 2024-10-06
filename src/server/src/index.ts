@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import { commonRoute } from './routes/common';
 import { homeRoute } from './routes/home';
+import { nodeRoute } from './routes/nodes';
 
 // Get environent variables
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(cors(corsOptions));
 // Bind routes
 app.use('/', homeRoute);
 app.use('/', commonRoute);
+app.use('/', nodeRoute);
 
 // Start server
 app.listen(3000, () => {

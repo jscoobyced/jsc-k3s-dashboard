@@ -1,11 +1,11 @@
 import express from 'express';
-import { defaultK3sNode } from '../../../common/src/models/kube/defaults';
-import { K3sNode } from '../../../common/src/models/kube/k3snode';
+import { K3sNode } from 'jsc-k3s-dashboard-common/src/models/kube/k3snode';
+import { getNodesData } from '../services/nodes/NodeDataService';
 import { sendResponse } from './response';
 
-export const homeRoute = express.Router();
+export const nodeRoute = express.Router();
 
-homeRoute.get('/api/pages/nodes', (req, res) => {
-  const nodes: K3sNode[] = [defaultK3sNode];
+nodeRoute.get('/api/pages/nodes', async (req, res) => {
+  const nodes: K3sNode[] = await getNodesData();
   sendResponse(res, nodes);
 });

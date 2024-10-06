@@ -70,12 +70,6 @@ jobs:
       - name: Install Dependencies
         run: yarn --cwd src/${{ matrix.service }} install
 
-      - name: Debug folder
-        run: |
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src || true
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/ || true
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
-
       - name: Create tarball
         run: tar -czf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }} node_modules
 
@@ -159,12 +153,6 @@ jobs:
 
       - name: Untar ${{ matrix.service }} Dependencies
         run: tar -xzf ${{ matrix.service }}.tar.gz -C src/${{ matrix.service }}/
-
-      - name: Debug folder
-        run: |
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src || true
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/ || true
-          ls -al src/${{ matrix.service }}/node_modules/jsc-k3s-dashboard-common/src/models/pages/ || true
 
       - name: Run Tests
         run: yarn --cwd src/${{ matrix.service }} test --coverage

@@ -1,4 +1,14 @@
-import { K3sNode } from './k3snode';
+import { K3sNode, K3sNodeMetric } from './k3snode';
+
+export const defaultK3sNodeMetric: K3sNodeMetric = {
+  metadata: {
+    name: 'dummy-metric',
+  },
+  usage: {
+    cpu: '1',
+    memory: '1',
+  },
+};
 
 export const defaultK3sNode: K3sNode = {
   nodeName: 'dummy-node',
@@ -15,15 +25,7 @@ export const defaultK3sNode: K3sNode = {
     memory: 1,
     pods: 1,
   },
-  metrics: {
-    metadata: {
-      name: 'dummy-metric',
-    },
-    usage: {
-      cpu: '1',
-      memory: '1',
-    },
-  },
+  metrics: defaultK3sNodeMetric,
   conditions: [
     {
       type: 'Ready',

@@ -1,10 +1,10 @@
 import { K3sNode } from 'jsc-k3s-dashboard-common/src/models/kube/k3snode';
-import React from 'react';
 import {
   readableCpuMetric,
   readableMemoryMetric,
   readablizeBytes,
-} from '../../services/format';
+} from 'jsc-k3s-dashboard-common/src/services/format';
+import React from 'react';
 
 const getNodesTable = (nodes: K3sNode[]): React.JSX.Element[] => {
   if (nodes.length === 0) return [];

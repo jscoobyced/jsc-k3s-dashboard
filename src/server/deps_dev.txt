@@ -6,6 +6,7 @@
 eslint
 globals
 jest
+msw
 nodemon
 postcss
 prettier
