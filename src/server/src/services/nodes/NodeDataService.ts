@@ -64,7 +64,7 @@ export const getNodesData = async (): Promise<K3sNode[]> => {
       return data;
     }
   } catch (error) {
-    console.log('Error fetching node:', error, (error as Error).message);
+    console.log('Error fetching node:', (error as Error).message);
   } finally {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
   }

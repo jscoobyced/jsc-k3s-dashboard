@@ -21,8 +21,6 @@ export const rawUnit = (value: string): number => {
     data = getNumber(value) * 1024 * 1024;
   } else if (value.indexOf('Gi') > 0) {
     data = getNumber(value) * 1024 * 1024 * 1024;
-  } else {
-    return 0;
   }
   if (data < 0) return 0;
   return data;

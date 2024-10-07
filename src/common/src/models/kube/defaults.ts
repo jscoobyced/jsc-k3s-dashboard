@@ -1,4 +1,5 @@
 import { K3sNode, K3sNodeMetric } from './k3snode';
+import { K3sPod } from './k3spod';
 
 export const defaultK3sNodeMetric: K3sNodeMetric = {
   metadata: {
@@ -33,4 +34,29 @@ export const defaultK3sNode: K3sNode = {
       message: 'Ready',
     },
   ],
+};
+
+export const defaultK3sPod: K3sPod = {
+  metadata: {
+    name: 'dummy-pod',
+    namespace: 'default',
+    creationTimestamp: '2021-01-01T00:00:00Z',
+    labels: {
+      app: 'dummy-app',
+      tier: 'dummy-tier',
+    },
+  },
+  spec: {
+    nodeName: 'dummy-node',
+    containers: [
+      {
+        name: 'dummy-container',
+        image: 'dummy-image',
+      },
+    ],
+  },
+  status: {
+    phase: 'Running',
+    startTime: '2021-01-01T00:00:00Z',
+  },
 };
