@@ -35,6 +35,7 @@ const Dashboard = () => {
     <Page
       articleContentElement={content}
       title={`Information about your cluster`}
+      wide={true}
     ></Page>
   );
 };

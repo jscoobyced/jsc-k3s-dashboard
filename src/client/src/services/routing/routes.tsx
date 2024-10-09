@@ -4,6 +4,7 @@ import Menu from '../../components/Menu';
 import Home from '../../components/pages/home';
 import Information from '../../components/pages/info';
 import Dashboard from '../../components/pages/kube/dashboard';
+import Nodes from '../../components/pages/kube/node';
 import PrivacyPolicy from '../../components/pages/privacy';
 import TermOfUse from '../../components/pages/tos';
 
@@ -28,6 +29,15 @@ export const AppRouter = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: '/node',
+        children: [
+          {
+            path: ':nodeName',
+            element: <Nodes />,
+          },
+        ],
       },
       {
         path: '/info',

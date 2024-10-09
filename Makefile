@@ -17,6 +17,8 @@ dev:
 	@yarn --cwd src/client dev
 
 start:
+	@yarn --cwd src/client build
+	@yarn --cwd src/server build
 	K3UID=$(K3UID) K3GID=$(K3GID) docker-compose up web api
 
 stop:

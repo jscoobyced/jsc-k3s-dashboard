@@ -5,6 +5,7 @@ import { getFromProcess } from 'jsc-k3s-dashboard-common/src/services/process';
 import { commonRoute } from './routes/common';
 import { homeRoute } from './routes/home';
 import { nodeRoute } from './routes/nodes';
+import { podRoute } from './routes/pods';
 
 // Get environent variables
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(cors(corsOptions));
 app.use('/', homeRoute);
 app.use('/', commonRoute);
 app.use('/', nodeRoute);
+app.use('/', podRoute);
 
 // Start server
 app.listen(3000, () => {

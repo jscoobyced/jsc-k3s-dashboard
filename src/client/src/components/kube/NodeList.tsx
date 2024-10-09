@@ -5,6 +5,7 @@ import {
   readablizeBytes,
 } from 'jsc-k3s-dashboard-common/src/services/format';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const getNodesTable = (nodes: K3sNode[]): React.JSX.Element[] => {
   if (nodes.length === 0) return [];
@@ -14,9 +15,9 @@ const getNodesTable = (nodes: K3sNode[]): React.JSX.Element[] => {
     const row = (
       <tr key={'node-' + item.nodeName}>
         <td>
-          <a className="text-primary-link" href={'/node/' + item.nodeName}>
+          <Link className="text-primary-link" to={`/node/${item.nodeName}`}>
             {item.nodeName}
-          </a>
+          </Link>
         </td>
         <td>{item.capacity.cpu}</td>
         <td>{readablizeBytes(item.capacity.memory)}</td>

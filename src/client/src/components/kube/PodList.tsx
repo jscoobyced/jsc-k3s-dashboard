@@ -1,5 +1,5 @@
+import { K3sPod } from 'jsc-k3s-dashboard-common/src/models/kube/k3spod';
 import React from 'react';
-import { K3sPod } from '../../models/pods/k3spod';
 
 const getPodsTable = (pods: K3sPod[]): React.JSX.Element[] => {
   if (pods.length === 0) return [];
