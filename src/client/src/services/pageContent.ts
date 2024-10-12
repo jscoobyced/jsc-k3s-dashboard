@@ -16,7 +16,6 @@ import {
   commonRoute,
   homeRoute,
   nodesRoute,
-  pageRoutes,
   podsRoute,
 } from './routing/apiRoutes';
 
@@ -44,7 +43,7 @@ export const getPodsByNodeName = async (
 };
 
 const getPageContent = async <T>(page: string): Promise<T | undefined> => {
-  const response = await fetch(`${pageRoutes}/${page}`);
+  const response = await fetch(page);
   if (!response.ok) return undefined;
   const data: T = (await response.json()) as T;
   return data;

@@ -5,11 +5,11 @@ import { setupServer } from 'msw/node';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 import * as getNodesData from '../../../services/pageContent';
-import { nodesRoute, pageRoutes } from '../../../services/routing/apiRoutes';
+import { nodesRoute } from '../../../services/routing/apiRoutes';
 import Dashboard from './dashboard';
 
 const server = setupServer(
-  http.get(`${pageRoutes}/${nodesRoute}`, () => {
+  http.get(nodesRoute, () => {
     return HttpResponse.json([defaultK3sNode]);
   }),
 );

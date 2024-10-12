@@ -1,10 +1,6 @@
-import { apiDomain, pageRoutes } from './apiRoutes';
+import { apiDomain } from './apiRoutes';
 
 describe('apiRoutes', () => {
-  it('should return the correct routes', () => {
-    expect(pageRoutes).toBe('http://localhost:3000/api/pages');
-  });
-
   it('should return the correct production routes', () => {
     const originalLocation = window.location;
     const mockedHostname = 'example.com';

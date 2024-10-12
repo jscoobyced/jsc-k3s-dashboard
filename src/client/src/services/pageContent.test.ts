@@ -11,12 +11,7 @@ import {
   getHomePageData,
   getNodesData,
 } from './pageContent';
-import {
-  commonRoute,
-  homeRoute,
-  nodesRoute,
-  pageRoutes,
-} from './routing/apiRoutes';
+import { commonRoute, homeRoute, nodesRoute } from './routing/apiRoutes';
 
 const expectedData = {
   id: 1,
@@ -24,10 +19,10 @@ const expectedData = {
 };
 
 const server = setupServer(
-  http.get(`${pageRoutes}/${homeRoute}`, () => {
+  http.get(homeRoute, () => {
     return HttpResponse.json(expectedData);
   }),
-  http.get(`${pageRoutes}/${commonRoute}`, () => {
+  http.get(commonRoute, () => {
     return HttpResponse.json(expectedData);
   }),
 );
@@ -50,7 +45,7 @@ describe('pageContent', () => {
 
   it('fetches default getHomePageData when error', async () => {
     server.use(
-      http.get(`${pageRoutes}/${homeRoute}`, () => {
+      http.get(homeRoute, () => {
         return HttpResponse.json({}, { status: 500 });
       }),
     );
@@ -60,7 +55,7 @@ describe('pageContent', () => {
 
   it('fetches default getCommonPageData when error', async () => {
     server.use(
-      http.get(`${pageRoutes}/${commonRoute}`, () => {
+      http.get(commonRoute, () => {
         return HttpResponse.json({}, { status: 500 });
       }),
     );
@@ -70,7 +65,7 @@ describe('pageContent', () => {
 
   it('fetches default nodes data when error', async () => {
     server.use(
-      http.get(`${pageRoutes}/${nodesRoute}`, () => {
+      http.get(nodesRoute, () => {
         return HttpResponse.json({}, { status: 500 });
       }),
     );

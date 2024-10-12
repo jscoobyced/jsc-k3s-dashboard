@@ -29,8 +29,11 @@ const PodList = (props: { pods: K3sPod[] }) => {
   const pods = props.pods;
 
   return (
-    <table className="dashboard mx-auto mt-5">
-      <caption>Pods list</caption>
+    <table
+      className="dashboard mx-auto mt-5"
+      aria-describedby="table-description"
+    >
+      <caption id="table-description">Pods list</caption>
       <thead>
         <tr>
           <th>Pod Name</th>
