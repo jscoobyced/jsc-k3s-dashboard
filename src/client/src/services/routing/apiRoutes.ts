@@ -7,8 +7,8 @@ import {
 
 export const apiDomain = () =>
   window.location.hostname === 'localhost'
-    ? 'http://localhost:3000/'
-    : `https://api.${window.location.hostname}/`;
+    ? 'http://localhost:3000'
+    : `https://api.${window.location.hostname}`;
 
 const baseUrlPath = apiDomain();
 

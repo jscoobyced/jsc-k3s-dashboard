@@ -10,7 +10,7 @@ describe('apiRoutes', () => {
     //@ts-expect-error: Allowed for this specific test only
     window.location = mockedUrl;
     const actualApiDomain = apiDomain();
-    expect(actualApiDomain).toBe(`https://api.${mockedHostname}/`);
+    expect(actualApiDomain).toBe(`https://api.${mockedHostname}`);
     //@ts-expect-error: Allowed for this specific test only
     delete window.location;
     window.location = originalLocation;
