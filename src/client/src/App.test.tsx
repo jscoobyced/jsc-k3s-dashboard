@@ -6,17 +6,13 @@ import {
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import App from './App';
-import {
-  commonRoute,
-  homeRoute,
-  pageRoutes,
-} from './services/routing/apiRoutes';
+import { commonRoute, homeRoute } from './services/routing/apiRoutes';
 
 const server = setupServer(
-  http.get(`${pageRoutes}/${homeRoute}`, () => {
+  http.get(homeRoute, () => {
     return HttpResponse.json(defaultHomePageData);
   }),
-  http.get(`${pageRoutes}/${commonRoute}`, () => {
+  http.get(commonRoute, () => {
     return HttpResponse.json(defaultCommonPageData);
   }),
 );
@@ -43,7 +39,7 @@ describe('App', () => {
 
   it('renders default view on error', async () => {
     server.use(
-      http.get(`${pageRoutes}/${homeRoute}`, () => {
+      http.get(homeRoute, () => {
         return HttpResponse.error();
       }),
     );
