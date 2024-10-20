@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createHashRouter, Outlet } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Menu from '../../components/Menu';
 import Home from '../../components/pages/home';
@@ -18,7 +18,7 @@ const Layout = () => {
   );
 };
 
-export const AppRouter = createBrowserRouter([
+export const AppRouter = createHashRouter([
   {
     element: <Layout />,
     children: [
