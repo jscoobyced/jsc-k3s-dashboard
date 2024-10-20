@@ -23,15 +23,15 @@ export const AppRouter = createHashRouter([
     element: <Layout />,
     children: [
       {
-        path: '/',
+        path: '',
         element: <Home />,
       },
       {
-        path: '/dashboard',
+        path: 'dashboard',
         element: <Dashboard />,
       },
       {
-        path: '/node',
+        path: 'node',
         children: [
           {
             path: ':nodeName',
@@ -40,15 +40,15 @@ export const AppRouter = createHashRouter([
         ],
       },
       {
-        path: '/info',
+        path: 'info',
         element: <Information />,
       },
       {
-        path: '/privacy',
+        path: 'privacy',
         element: <PrivacyPolicy />,
       },
       {
-        path: '/tos',
+        path: 'tos',
         element: <TermOfUse />,
       },
     ],

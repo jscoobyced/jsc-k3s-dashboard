@@ -8,7 +8,7 @@ const Footer = (): React.JSX.Element => {
   return (
     <footer className="flex justify-center py-2 text-sm sm:text-base ">
       {siteName} &copy; 2023-{year} IndyTheDog - {version} -
-      <Link to="/privacy">Privacy Policy</Link> -<Link to="/tos">TOS</Link>
+      <Link to="privacy">Privacy Policy</Link> -<Link to="tos">TOS</Link>
     </footer>
   );
 };

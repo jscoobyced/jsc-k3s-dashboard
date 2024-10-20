@@ -15,7 +15,7 @@ const getNodesTable = (nodes: K3sNode[]): React.JSX.Element[] => {
     const row = (
       <tr key={'node-' + item.nodeName}>
         <td>
-          <Link className="text-primary-link" to={`/node/${item.nodeName}`}>
+          <Link className="text-primary-link" to={`node/${item.nodeName}`}>
             {item.nodeName}
           </Link>
         </td>
